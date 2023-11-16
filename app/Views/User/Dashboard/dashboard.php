@@ -9,6 +9,37 @@
   box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);
 }
 </style>
+<style>
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+    </style>
 <?php $this->endSection();?>
 
 

@@ -82,6 +82,11 @@
                                 <textarea class="form-control" id="keterangan" name="keterangan" rows="5" placeholder="Keterangan Produk" 
                                 autocomplete="off" required><?= $value->keterangan?></textarea>
                             </div>
+                             <div class="mb-3">
+                                <label for="link address">link Address Video </label>
+                                <textarea class="form-control" id="link address" name="link_address" rows="5" placeholder="Link Address Video Produk" 
+                                autocomplete="off" required><?= $value->link_address?></textarea>
+                            </div>
                             <script>
                                 CKEDITOR.replace( 'keterangan' );
                             </script>

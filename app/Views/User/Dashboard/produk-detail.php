@@ -1,5 +1,39 @@
 <?= $this->extend('Template/template') ?>
+<?php $this->section('css');?>
+<style>
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
 
+        .mySlides {
+            display: none;
+        }
+
+        .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: transparent;
+            border: 2px solid #bbb; /* Add a border to make the dots visible */
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease, border-color 0.6s ease; /* Add transition for smoother effect */
+            cursor: pointer;
+        }
+
+        .active {
+            /* background-color: #717171; */
+            border-color: transparent; /* Change border-color for the active dot */
+        }
+    </style>
+<?php $this->endSection();?>
 
 <?= $this->section('IsKonten') ?>
 <div class="row">
@@ -15,27 +49,21 @@
                         <div class="product-detai-imgs">
             
                             <div class="row">
-                                <!-- <div class="col-md-2 col-sm-3 col-4">
-                                    <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                        <a class="nav-link active" id="product-1-tab" data-bs-toggle="pill" href="#product-1" role="tab" aria-controls="product-1" aria-selected="true">
-                                            <img src="/assets/images/product/img-7.png" alt="" class="img-fluid mx-auto d-block rounded">
-                                        </a>
-                                        <a class="nav-link" id="product-2-tab" data-bs-toggle="pill" href="#product-2" role="tab" aria-controls="product-2" aria-selected="false">
-                                            <img src="/assets/images/product/img-8.png" alt="" class="img-fluid mx-auto d-block rounded">
-                                        </a>
-                                        <a class="nav-link" id="product-3-tab" data-bs-toggle="pill" href="#product-3" role="tab" aria-controls="product-3" aria-selected="false">
-                                            <img src="/assets/images/product/img-7.png" alt="" class="img-fluid mx-auto d-block rounded">
-                                        </a>
-                                        <a class="nav-link" id="product-4-tab" data-bs-toggle="pill" href="#product-4" role="tab" aria-controls="product-4" aria-selected="false">
-                                            <img src="/assets/images/product/img-8.png" alt="" class="img-fluid mx-auto d-block rounded">
-                                        </a>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-7 offset-md-1 col-sm-9 col-8">
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show active" id="product-1" role="tabpanel" aria-labelledby="product-1-tab">
-                                            <div>
-                                                <img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>" alt="" class="img-fluid mx-auto d-block">
+                                            <div class="slideshow-container">
+                                                <div class="mySlides">
+                                                    <img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>" alt="" class="img-fluid mx-auto d-block" >
+                                                </div>
+                                                <div class="mySlides">
+                                                    <iframe width="315" height="360" src="<?=$value->link_address?>" frameborder="0" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+
+                                            <div class="dot-container">
+                                                <span class="dot" onclick="currentSlide(1)"></span>
+                                                <span class="dot" onclick="currentSlide(2)"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -153,5 +181,37 @@
         }
 
      
+</script>
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
 </script>
 <?=$this->endSection()?>

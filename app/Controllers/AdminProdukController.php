@@ -75,7 +75,6 @@ class AdminProdukController extends BaseController
             'minPesanan'=>$this->request->getVar('minPesanan'),
             'beratProduk' =>  $this->request->getVar('beratProduk'), 
         ];
-
         try {
             $this->produk->insert($dataProduk);
             $cekData = $this->produk->where('nama_produk', $nama_produk)->first();
@@ -86,6 +85,7 @@ class AdminProdukController extends BaseController
                 'id_produk' => $cekData->id,
                 'keterangan' => $this->request->getVar('keterangan'),
                 'stok' => $this->request->getVar('stok'),
+                'link_address' =>  $this->request->getVar('link_address'), 
             ];
             $dataRating = [
                 'produk_id' => $cekData->id,
@@ -205,6 +205,7 @@ class AdminProdukController extends BaseController
                     'id_produk' => $id,
                     'keterangan' => $this->request->getVar('keterangan'),
                     'stok' => $this->request->getVar('stok'),
+                     'link_address' =>  $this->request->getVar('link_address'), 
                 ];
 
                 if (!empty($cekData)) {
