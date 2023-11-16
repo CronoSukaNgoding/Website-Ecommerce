@@ -119,7 +119,7 @@ class DataPengirimanController extends BaseController
             $saveKomen = $this->komentar->save($dataKomentar);
             $saveRating = $this->rating->save($dataRating);
              $this->sesi->setFlashdata('sukses-tambah', 'Data berhasil ditambah');
-             return redirect()->to('/data-review');
+             return redirect()->to('/review');
         } catch (\Exception $e) {
          $e->getMessage();
         }

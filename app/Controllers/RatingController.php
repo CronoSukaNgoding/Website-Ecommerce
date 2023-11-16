@@ -48,9 +48,10 @@ class RatingController extends BaseController
             ->join('peringkat_produk', 'produk.id = peringkat_produk.produk_id', 'left')
             ->join('komentar','komentar.produk_id= produk.id', 'left')
             ->orderBy('payment.created_at', 'DESC')
-            ->groupby('payment.created_at')
+            ->groupby('peringkat_produk.created_at')
             ->where('payment.status', 4)
             ->where('payment.id_user', $this->sesi->get('user_id'))
+            ->where('peringkat_produk.userid', $this->sesi->get('user_id') )
             ->get()->getResult();
 
             if ($TEST) {
