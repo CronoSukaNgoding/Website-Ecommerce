@@ -40,8 +40,8 @@ class PaymentController extends BaseController
                 $transferFile = $this->request->getFile('transfer');
     
                 if ($transferFile->isValid() && !$transferFile->hasMoved()) {
-                    $fileName = 'Bukti-pembayaran-' . str_replace(' ', '_', $user->fullname) . '.' . $transferFile->getClientExtension();
-                    $transferFile->move(ROOTPATH . 'public/uploads', $fileName);
+                    $fileName = 'Bukti-pembayaran-' . $idPrePay . '-' . $userId . '-' . str_replace(' ', '_', $user->fullname) . '.' . $transferFile->getClientExtension();
+                    $transferFile->move(ROOTPATH . 'public/uploads/bukti-pembayaran/' . $userId, $fileName);
     
                     foreach ($idProduk as $id) {
                         $data = [

@@ -148,15 +148,7 @@
 }
 
 </style>
-     <style>
-
-.card{
-    transition: box-shadow 0.3s ease;
-}
-.card:hover {
-  box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);
-}
-</style>
+     
 
 
 </head>

@@ -30,7 +30,6 @@ class DataPembayaranController extends BaseController
         ->join('produk', 'produk.id = payment.id_produk')
         ->join('status', 'status.id = payment.status')
         ->orderBy('payment.created_at', 'DESC')
-        
         ->where('payment.id',$id)->first();
 
         $status= $this->status->get()->getResult();

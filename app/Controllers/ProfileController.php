@@ -43,11 +43,18 @@ class ProfileController extends BaseController
         $fullname = $this->request->getVar('fullname');
         $extension = '';
         $namaavatar = '';
-
         if ($avataruser->isValid()) {
+            if ($cekUser->avatar) {
+                $existingFilePath = WRITEPATH . '../public/user/avatar/' . $cekUser->avatar;
+                if (file_exists($existingFilePath)) {
+                    unlink($existingFilePath);
+                }
+            }
+
+            // Process the new avatar file
             $extension = $avataruser->getClientExtension();
-            $sanitizedFullname = preg_replace('/[^a-zA-Z0-9\s]/', '', $fullname); 
-            $sanitizedFullname = str_replace(' ', '-', $sanitizedFullname); 
+            $sanitizedFullname = preg_replace('/[^a-zA-Z0-9\s]/', '', $fullname);
+            $sanitizedFullname = str_replace(' ', '-', $sanitizedFullname);
             $namaavatar = $sanitizedFullname . '.' . $extension;
             $avataruser->move(WRITEPATH . '../public/user/avatar', $namaavatar);
         } else {

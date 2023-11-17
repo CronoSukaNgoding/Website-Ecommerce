@@ -21,9 +21,19 @@
                                 <label for="harga_produk">Total Harga</label>
                                 <input id="harga_produk" name="harga_produk" type="text" class="form-control" placeholder="Harga Produk" autocomplete="off" value="<?=$result->total?>" disabled>
                             </div>
-                            <div class="card">
-                                <img class="card-img img-fluid  " src="<?= base_url('uploads/').$result->transfer ?>" alt="Card image">
-                            </div>
+                                <?php
+                                $fileNameParts = explode('-', $result->transfer);
+                                $userIdFromFileName = $fileNameParts[count($fileNameParts) - 2];
+                                $idPreIndex = count($fileNameParts) - 3;
+                             $idPreFromFileName = implode('-', array_slice($fileNameParts, 2, 5));
+
+                               
+                                if ($userIdFromFileName == $result->user_id && $idPreFromFileName == $result->id_pre): ?>
+                                    <div class="card">
+                                        <img class="card-img img-fluid" src="<?= base_url('uploads/bukti-pembayaran/' . $result->user_id . '/' . $result->transfer) ?>" alt="Card image">
+                                    </div>
+                                <?php endif; ?>
+                            
                         
                             <div class="mb-3">
                                 <label class="control-label" for="kondisi">Status Pembayaran</label>

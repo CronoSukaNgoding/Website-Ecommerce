@@ -76,7 +76,10 @@
                     </div> <!-- end col -->
                     <div class="col-sm-6">
                         <div class="text-sm-end mt-2 mt-sm-0">
-                        <a href="#" id="checkoutLink" class="btn btn-success">
+                        <!-- <a href="#" id="checkoutLink" class="btn btn-success">
+                            <i class="mdi mdi-cart-arrow-right me-1"></i> Checkout
+                        </a> -->
+                        <a href="#"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmationModal">
                             <i class="mdi mdi-cart-arrow-right me-1"></i> Checkout
                         </a>
                         </div>
@@ -127,7 +130,23 @@
         </div>
     </div>
     <?php endforeach; ?>
+    <div class="modal fade text-left" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> Apakah anda yakin untuk men-Checkout barang ini ?</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <!-- Change the ID of the submit button to prevent conflicts -->
+                <button type="submit" id="checkoutLink" class="btn btn-primary">Yakin</button>
+            </div>
+        </div>
+    </div>
+</div>
     </div> <!-- end col -->
+
 </div>
 <!-- end row -->
 
@@ -141,6 +160,7 @@
             saveCheckoutItemsToServer();
         });
     });
+    
     
 
 
