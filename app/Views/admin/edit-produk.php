@@ -49,14 +49,7 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="control-label" for="kondisi">Kondisi</label>
-                                <select name="kondisi" class="form-control select2">
-                                    <option><?= $value->kondisi?></option>
-                                    <option value="Baru">Baru</option>
-                                    <option value="Bekas">Bekas</option>
-                                </select>
-                            </div>
+                           
 
                             <div class="mb-3">
                                 <label for="stok">Stok Barang</label>
