@@ -69,7 +69,6 @@ class AdminProdukController extends BaseController
             'harga_produk' => $harga,
             'id_kategori' => $this->request->getVar('kategori'),
             'id_sub' => $this->request->getVar('sub_kategori'),
-            'kondisi' => $this->request->getVar('kondisi'),
             'photo_produk' => $namaphoto,
             'toko_id'=> $cektoko->id,
             'minPesanan'=>$this->request->getVar('minPesanan'),
@@ -158,7 +157,6 @@ class AdminProdukController extends BaseController
             'harga_produk' => $this->request->getVar('harga_produk'),
             'id_kategori' => $this->request->getVar('kategori'),
             'id_sub' => $this->request->getVar('sub_kategori'),
-            'kondisi' => $this->request->getVar('kondisi'),
         ];
 
         if ($photoproduk->isValid() && !$photoproduk->hasMoved()) {           
@@ -184,7 +182,6 @@ class AdminProdukController extends BaseController
                 'harga_produk' => $this->request->getVar('harga_produk'),
                 'id_kategori' => $this->request->getVar('kategori'),
                 'id_sub' => $this->request->getVar('sub_kategori'),
-                'kondisi' => $this->request->getVar('kondisi'),
                 'photo_produk' => $namaphoto,
             ];
         } else {
