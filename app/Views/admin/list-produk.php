@@ -14,7 +14,7 @@
                         title="Update Produk" style="margin-bottom: 10px;"><i class="fas fa-pencil-alt"></i> Tambah Produk
                     </button>
                 </a>
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style="width: 100%">
+                <table id="datatable" class="table table-bordered " style="width: 100%">
                     <thead>
                  
                     <tr>
@@ -22,10 +22,8 @@
                         <th>Harga</th>
                         <th>Kategori</th>
                         <th>Merek</th>
-                        <th>Kondisi</th>
                         <th>Stok</th>
                         <th>Keterangan</th>
-                        <th>Gambar</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -39,17 +37,8 @@
                         <td id="harga_produk_td"><?= $value->harga_produk ?></td>
                         <td><?= $value->kategori?></td>
                         <td><?= $value->sub_kategori?></td>
-                        <td><?= $value->kondisi?></td>
                         <td><?= $value->stok?></td>
                         <td><?= $value->keterangan?></td>
-                        <td>
-                            <div class="col-lg-4">
-                                <div>
-                                    <img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>" alt="" class="rounded avatar-md">
-                                    <p class="mt-2  mb-lg-0"></p>
-                                </div>
-                            </div>
-                        </td>
                         <td>
                             <a href="<?=base_url("edit-produk/". $value->produk)?>">
                                 <button

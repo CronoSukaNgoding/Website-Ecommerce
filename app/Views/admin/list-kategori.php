@@ -272,7 +272,7 @@
 
         <!-- Modal hapus -->
         <!-- Modal hapus -->
-        <?php foreach($subkategori as $value) : ?>
+        <?php foreach($kategori as $value) : ?>
         <div class="modal fade text-left" id="hapuskategori<?= $value->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

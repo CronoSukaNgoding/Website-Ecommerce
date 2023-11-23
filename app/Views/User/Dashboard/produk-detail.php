@@ -1,38 +1,6 @@
 <?= $this->extend('Template/template') ?>
 <?php $this->section('css');?>
-<style>
-        .slideshow-container {
-            max-width: 100%;
-            position: relative;
-            margin: auto;
-        }
 
-        .mySlides {
-            display: none;
-        }
-
-        .dot-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: transparent;
-            border: 2px solid #bbb; /* Add a border to make the dots visible */
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease, border-color 0.6s ease; /* Add transition for smoother effect */
-            cursor: pointer;
-        }
-
-        .active {
-            /* background-color: #717171; */
-            border-color: transparent; /* Change border-color for the active dot */
-        }
-    </style>
 <?php $this->endSection();?>
 
 <?= $this->section('IsKonten') ?>
@@ -42,29 +10,52 @@
             <div class="card-body">
          
                 <div class="row">
-                <?php
-					foreach ($result as $value):
-						?>
+
+                        
                     <div class="col-xl-6">
                         <div class="product-detai-imgs">
-            
+                           
+
                             <div class="row">
                                 <div class="col-md-7 offset-md-1 col-sm-9 col-8">
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show active" id="product-1" role="tabpanel" aria-labelledby="product-1-tab">
-                                            <div class="slideshow-container">
-                                                <div class="mySlides">
-                                                    <img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>" alt="" class="img-fluid mx-auto d-block" >
-                                                </div>
-                                                <div class="mySlides">
-                                                    <iframe width="315" height="360" src="<?=$value->link_address?>" frameborder="0" allowfullscreen></iframe>
-                                                </div>
-                                            </div>
+                                           
+                                                <div id="carouselExampleIndicators<?= $result->id ?>" class="carousel slide" data-bs-ride="carousel">
+                                                    <ol class="carousel-indicators">
+                                                        <?php
+                                                        for ($i = 0; $i < count($daftar_foto); $i++) :
+                                                            ?>
+                                                            <li data-bs-target="#carouselExampleIndicators<?= $result->id ?>" data-bs-slide-to="<?= $i ?>" <?= ($i === 0) ? 'class="active"' : '' ?>></li>
+                                                        <?php endfor; ?>
 
-                                            <div class="dot-container">
-                                                <span class="dot" onclick="currentSlide(1)"></span>
-                                                <span class="dot" onclick="currentSlide(2)"></span>
+                                                    </ol>
+                                                    <div class="carousel-inner" role="listbox">
+                                                        <?php
+                                                            for ($i = 0; $i < count($daftar_foto); $i++) :
+                                                                ?>
+                                                                <div class="carousel-item <?= ($i === 0) ? 'active' : '' ?>">
+                                                                    
+                                                                    <?php if (filter_var($daftar_foto[$i], FILTER_VALIDATE_URL)) : ?>
+                                                                        <!-- Jika itu adalah URL, gunakan iFrame -->
+                                                                        <iframe class="d-block w-100"  width="315" height="360" src="<?= $daftar_foto[$i] ?>" frameborder="0" allowfullscreen></iframe>
+                                                                    <?php else : ?>
+                                                                        <!-- Jika bukan URL, tampilkan gambar -->
+                                                                        <img class="d-block img-fluid" src="/admin/produk/<?= $daftar_foto[$i] ?>" alt="Slide <?= ($i + 1) ?>">
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            <?php endfor; ?>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carouselExampleIndicators<?= $result->id ?>" role="button" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleIndicators<?= $result->id ?>" role="button" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     
@@ -77,11 +68,11 @@
                     <div class="col-xl-6">
 
                         <div class="mt-4 mt-xl-3">
-                            <a href="javascript: void(0);" class="text-primary"><?= $value->kategori?></a>
-                            <h4 class="mt-1 mb-3"><?= $value->nama_produk?></h4>
-                            <h5 class="mb-4">Price : <span class="text-muted me-2"></span> <b id="harga_produk_p"><?= $value->harga_produk?></b></h5>
-                            <p class="text-muted mb-4"><?= $value->keterangan?></p>
-                            <a href="#" onclick="tambahKeranjang(this)" data-kodeproduk="<?= $value->id ?>">
+                            <a href="javascript: void(0);" class="text-primary"><?= $result->kategori?></a>
+                            <h4 class="mt-1 mb-3"><?= $result->nama_produk?></h4>
+                            <h5 class="mb-4">Price : <span class="text-muted me-2"></span> <b id="harga_produk_p"><?= $result->harga_produk?></b></h5>
+                            <p class="text-muted mb-4"><?= $result->keterangan?></p>
+                            <a href="#" onclick="tambahKeranjang(this)" data-kodeproduk="<?= $result->id ?>">
                                 <button type="button" class="btn btn-primary waves-effect waves-light mt-2 me-1">
                                     <i class="bx bx-cart me-2"></i>Add to cart
                                 </button>
@@ -111,9 +102,7 @@
                         </div>
                  
                     </div>
-                    <?php
-                        endforeach;
-                        ?>
+
                 </div>
                 <!-- end row -->
 

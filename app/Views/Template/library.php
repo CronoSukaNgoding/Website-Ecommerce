@@ -268,7 +268,7 @@
             ${data.map(item => `
                 <li class="list-group-item listItem">
                     <div class="product-item d-flex align-items-center">
-                        <img class="avatar-sm" src="/admin/produk/${item.photo_produk}" alt="Product Image">
+                       
                         <div class="product-details ms-3">
                             <h5 class="product-name">${item.nama_produk}</h5>
                             <p class="product-price">Rp ${parseFloat(item.harga_produk).toLocaleString('id-ID')}</p>
@@ -350,10 +350,7 @@
                         var productItem = $("<div>").addClass("product-item d-flex align-items-center");
 
       
-                        var productImage = $("<img>")
-                            .addClass("avatar-sm")
-                            .attr("src", "/admin/produk/" + item.photo_produk)
-                            .attr("alt", "Product Image");
+
 
            
                         var productDetails = $("<div>").addClass("product-details ms-3");
@@ -367,7 +364,7 @@
 
                      
                         productDetails.append(productName, productPrice);
-                        productItem.append(productImage, productDetails);
+                        productItem.append( productDetails);
                         listItem.append(productItem);
 
                       

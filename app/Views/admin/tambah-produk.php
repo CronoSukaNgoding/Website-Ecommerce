@@ -63,8 +63,8 @@
 
                             <div class="mb-3">
                                 <label for="photo_produk">Foto</label>
-                                <input type="file" class="form-control" id="photo_produk" name="photo_produk" placeholder="Foto"
-                                value="" autocomplete="off" required>
+                                <input type="file" class="form-control" id="photo_produk" name="photo_produk[]" placeholder="Foto"
+                                value="" autocomplete="off" multiple required>
                             </div>
 
                             <div class="mb-3">

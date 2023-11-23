@@ -9,7 +9,6 @@
                     <table class="table align-middle mb-0 table-nowrap">
                         <thead class="table-light">
                             <tr>
-                                <th>Gambar</th>
                                 <th>Produk</th>
                                 <th>Jumlah</th>
                                 <th>Berat</th>
@@ -28,10 +27,7 @@
                                 <input type="hidden" class="dataIdProduk" value="<?=$value->id_produk?>">
                                 <input type="hidden"  class="dataIdCart" value="<?= session()->get('unikSesi')?>">
                                 
-                                <td>
-                                    <img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>" alt="product-img"
-                                        title="product-img" class="avatar-md" />
-                                </td>
+                               
                                 <td>
                                     <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark"><?= $value->nama_produk?></a></h5>
                                     <p class="mb-0">Brand : <span class="fw-medium"><?=$value->sub_kategori?></span></p>

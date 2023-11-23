@@ -16,7 +16,6 @@ class ProdukModel extends Model
         'harga_produk',
         'id_kategori',
         'id_sub',
-        'photo_produk',
         'minPesanan',
         'beratProduk',
         'toko_id'

@@ -168,15 +168,42 @@
 
                 var data = JSON.parse(response);
                 var newHTML = "";
-                // console.log(data);
+                console.log(data);
             data.forEach(function (product) {
+                var daftar_foto = product.daftar_foto.split(','); // Memecah string menjadi array
+
+                // Buat elemen HTML carousel dinamis
+                var indicatorsHtml = '';
+                var slidesHtml = '';
+
+                for (var i = 0; i < daftar_foto.length; i++) {
+                    indicatorsHtml += '<li data-bs-target="#carouselExampleIndicators' + product.produk + '" data-bs-slide-to="' + i + '" ' + (i === 0 ? 'class="active"' : '') + '></li>';
+                    slidesHtml += '<div class="carousel-item ' + (i === 0 ? 'active' : '') + '">';
+                    slidesHtml += '<img class="d-block img-fluid" src="/admin/produk/' + daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
+                    slidesHtml += '</div>';
+                }
+                console.log(daftar_foto);
                 newHTML += `
                    <div class="col-md-6 col-xl-3">
                     <a href="/produk-detail/${product.produk}" class="link-card">
                         <div class="card" >
                         <div class="card-body">
-                            <img class="card-img-top img-fluid product-img mb-3"
-                                src="/admin/produk/${product.photo_produk}" alt="Card image cap">
+                            <div id="carouselExampleIndicators${product.produk}" class="carousel slide" data-bs-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        ${indicatorsHtml}
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        ${slidesHtml}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
                                 <h4 class="card-title">${product.nama_produk}</h4>
                                 <p class="card-text card-produk" id="harga_produk_p">${product.harga_produk}</p>
                                 <p class="card-text card-produk">${product.kategori}</p>

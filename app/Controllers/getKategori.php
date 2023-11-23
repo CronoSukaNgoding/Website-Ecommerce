@@ -15,6 +15,7 @@ class getKategori extends BaseController
             ->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')
             ->join('produk_detail','produk.id = produk_detail.id_produk')
             ->join('peringkat_produk', 'produk.id = peringkat_produk.produk_id', 'left')
+            ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
             ->where('kategori.id', $categoryId)->groupBy('produk.id')->get()->getResult();
 
             if ($dataByKategori) {
@@ -46,6 +47,7 @@ class getKategori extends BaseController
             ->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')
             ->join('produk_detail','produk.id = produk_detail.id_produk')
             ->join('peringkat_produk', 'produk.id = peringkat_produk.produk_id', 'left')
+            ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
             ->where('produk.id_sub', $SubcategoryId)->groupBy('produk.id')
             ->get()->getResult();
 
@@ -97,10 +99,11 @@ class getKategori extends BaseController
 
     public function getProduct(){
         try {
-            $product = $this->produk->select("*, produk.created_at as tglbuat, produk.id as produk")
+            $product = $this->produk->select("*, produk.created_at as tglbuat, produk.id as produk, GROUP_CONCAT(groupphotoproduk.photo_produk) AS daftar_foto")
                  ->selectAvg('peringkat_produk.peringkat', 'rata_rata_peringkat')
                 ->join('produk_detail', 'produk_detail.id_produk = produk.id')
                 ->join('peringkat_produk', 'produk.id = peringkat_produk.produk_id', 'left')
+                ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
                 ->join('kategori', 'kategori.id = produk.id_kategori')
                 ->join('sub_kategori', 'sub_kategori.id = produk.id_sub')
                 ->orderBy('produk.nama_produk', 'ASC')

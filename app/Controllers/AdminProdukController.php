@@ -36,21 +36,10 @@ class AdminProdukController extends BaseController
     public function svproduk()
     {
         $uuid = Uuid::uuid4();
-        $photoproduk = $this->request->getFile('photo_produk');
+        $photoproduk = $this->request->getFiles('photo_produk');
         $nama_produk = $this->request->getVar('nama_produk');
-        $extension = $photoproduk->getClientExtension();
-        $sanitizedProduk = preg_replace('/[^a-zA-Z0-9\s]/', '', $nama_produk); 
-        $sanitizedProduk = str_replace(' ', '-', $sanitizedProduk); 
-        $namaphoto = $sanitizedProduk . '.' . $extension;
         
-        $destinationPath = WRITEPATH . '../public/admin/produk/';
-        $existingFile = $destinationPath . $namaphoto;
         
-        if (is_file($existingFile)) {
-            unlink($existingFile);
-        }
-        
-        $photoproduk->move($destinationPath, $namaphoto);
 
         
 
@@ -69,7 +58,6 @@ class AdminProdukController extends BaseController
             'harga_produk' => $harga,
             'id_kategori' => $this->request->getVar('kategori'),
             'id_sub' => $this->request->getVar('sub_kategori'),
-            'photo_produk' => $namaphoto,
             'toko_id'=> $cektoko->id,
             'minPesanan'=>$this->request->getVar('minPesanan'),
             'beratProduk' =>  $this->request->getVar('beratProduk'), 
@@ -91,6 +79,30 @@ class AdminProdukController extends BaseController
                 'userid'=>$this->sesi->get('user_id'),
                 'peringkat'=> 0 ,
             ];
+            $foto_produk_data = [];
+            foreach ($photoproduk['photo_produk'] as $namaFile) {
+                // Lakukan pemrosesan setiap nama file di sini
+                $extension = $namaFile->getClientExtension();
+                $sanitizedProduk = preg_replace('/[^a-zA-Z0-9\s]/', '', $nama_produk);
+                $sanitizedProduk = str_replace(' ', '-', $sanitizedProduk);
+                $namaphoto = $sanitizedProduk . '_' . uniqid() . '.' . $extension;
+
+                $destinationPath = WRITEPATH . '../public/admin/produk/';
+                $existingFile = $destinationPath . $namaphoto;
+
+                if (is_file($existingFile)) {
+                    unlink($existingFile);
+                }
+                $namaFile->move($destinationPath, $namaphoto);
+
+                $foto_produk_data[] = [
+                    'id_produk' => $cekData->id,
+                    'photo_produk' => $namaphoto,
+                ];
+            }
+            foreach ($foto_produk_data as $dataFoto) {
+                $this->photoproduk->insert($dataFoto);
+            }
             $this->rating->insert($dataRating);
             $this->produk_detail->insert($dataDetail);
             $this->sesi->setFlashdata('sukses', 'Data berhasil diubah');
@@ -122,14 +134,19 @@ class AdminProdukController extends BaseController
     }
     
     public function viewupdate($id){
-        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id")
+        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id,GROUP_CONCAT(groupphotoproduk.photo_produk) AS daftar_foto")
         ->join('produk_detail', 'produk_detail.id_produk = produk.id')
         ->join('kategori', 'kategori.id = produk.id_kategori')
         ->join('sub_kategori', 'sub_kategori.id = produk.id_sub') 
+        ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
         ->orderBy('produk.created_at', 'DESC')
         ->where('produk.id', $id)
-        ->get()
-        ->getResult();
+        ->first();
+        $daftarFotoArray = explode(',', $cekdetail->daftar_foto);
+        $linkaddress = $cekdetail->link_address;
+        $daftarFotoArray[] = $linkaddress;
+
+        
 
         $cekkategori = $this->kategori->get()->getResult();
         $ceksub = $this->kategori->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')->get()->getResult();
@@ -142,6 +159,7 @@ class AdminProdukController extends BaseController
            'subkategori' => $ceksub, 
            'user' => $this->users->where('user_id', $this->sesi->get('user_id'))->first(),
            'isUri' => $this->request->uri,
+            'daftar_foto' => $daftarFotoArray,
        ];
        
        return view ('admin/edit-produk',$data);
@@ -158,39 +176,6 @@ class AdminProdukController extends BaseController
             'id_kategori' => $this->request->getVar('kategori'),
             'id_sub' => $this->request->getVar('sub_kategori'),
         ];
-
-        if ($photoproduk->isValid() && !$photoproduk->hasMoved()) {           
-            $nama_produk = $this->request->getVar('nama_produk');
-            $extension = $photoproduk->getClientExtension();
-            $sanitizedProduk = preg_replace('/[^a-zA-Z0-9\s]/', '', $nama_produk); 
-            $sanitizedProduk = str_replace(' ', '-', $sanitizedProduk); 
-            $namaphoto = $sanitizedProduk . '.' . $extension;
-            
-            $destinationPath = WRITEPATH . '../public/admin/produk/';
-            $existingFile = $destinationPath . $namaphoto;
-            
-            if (is_file($existingFile)) {
-                unlink($existingFile);
-            }
-            
-
-            $photoproduk->move($destinationPath, $namaphoto);
-            
-            $dataProduk = [
-                'id' => $id,
-                'nama_produk' => $this->request->getVar('nama_produk'),
-                'harga_produk' => $this->request->getVar('harga_produk'),
-                'id_kategori' => $this->request->getVar('kategori'),
-                'id_sub' => $this->request->getVar('sub_kategori'),
-                'photo_produk' => $namaphoto,
-            ];
-        } else {
-            if (!empty($cekphotolama)) {
-                $dataProduk['photo_produk'] = $cekphotolama->photo_produk;
-            } else {
-                $dataProduk['photo_produk'] = 'default.jpg';
-            }
-        }
         try {
             $produkData = $this->produk->where('id', $id)->first();
 

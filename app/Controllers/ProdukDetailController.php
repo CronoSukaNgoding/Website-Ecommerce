@@ -7,15 +7,19 @@ class ProdukDetailController extends BaseController
 {
     public function index($id)
     {
-        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id")->join('produk_detail', 'produk_detail.id_produk = produk.id')->
-        join('kategori' ,'kategori.id = produk.id_kategori')->join('sub_kategori' ,'sub_kategori.id = produk.id_sub')->
-        orderBy('produk.created_at', 'DESC')->where('produk.id', $id)->get()->getResult();
-
+        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id,GROUP_CONCAT(groupphotoproduk.photo_produk) AS daftar_foto")->join('produk_detail', 'produk_detail.id_produk = produk.id')->
+        join('kategori' ,'kategori.id = produk.id_kategori')->join('sub_kategori' ,'sub_kategori.id = produk.id_sub')->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')->
+        orderBy('produk.created_at', 'DESC')->where('produk.id', $id)->first();
+        $daftarFotoArray = explode(',', $cekdetail->daftar_foto);
+        $linkaddress = $cekdetail->link_address;
+        $daftarFotoArray[] = $linkaddress;
         $data = [
             'id' => $id,
             'title' => 'Detail Produk',
             'result' => $cekdetail,
+            'daftar_foto' => $daftarFotoArray,
         ];
+        // dd($data);
 
         return view('User/Dashboard/produk-detail', $data);
     }
@@ -89,7 +93,6 @@ class ProdukDetailController extends BaseController
                     $output[] = [
                         'nama_produk' => $produk->nama_produk,
                         'harga_produk' => $produk->harga_produk,
-                        'photo_produk'=> $produk->photo_produk,
                     ];
                 }
             }

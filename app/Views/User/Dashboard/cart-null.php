@@ -9,7 +9,6 @@
                 <table class="table align-middle mb-0 table-nowrap">
                     <thead class="table-light">
                         <tr>
-                            <th>Gambar</th>
                             <th>Produk</th>
                             <th>Jumlah</th>
                             <th>Harga</th>

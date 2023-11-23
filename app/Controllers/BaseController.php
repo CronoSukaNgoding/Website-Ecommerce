@@ -26,6 +26,7 @@ use App\Models\KurirModel;
 use App\Models\SendingModel;
 use App\Models\RatingModel;
 use App\Models\KomentarModel;
+use App\Models\groupPhotoProdukModel;
 
 
 /**
@@ -69,6 +70,7 @@ abstract class BaseController extends Controller
         $this->sending = new SendingModel();
         $this->rating = new RatingModel();
         $this->komentar = new KomentarModel();
+        $this->photoproduk = new groupPhotoProdukModel();
     }
     /**
      * An array of helpers to be loaded automatically upon
