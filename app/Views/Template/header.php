@@ -4,7 +4,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="<?=base_url("dashboard")?>" class="logo logo-dark">
+                <a href="<?=base_url("dashboard")?>" class="">
                     <h1>Luxo Mall</h1>
                     
                 </a>

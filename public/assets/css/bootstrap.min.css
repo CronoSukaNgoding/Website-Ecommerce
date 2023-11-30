@@ -266,12 +266,12 @@ sup {
 }
 
 a {
-    color: var(--bs-link-color);
+    color: #282828;
     text-decoration: none
 }
 
 a:hover {
-    color: var(--bs-link-hover-color);
+    color: #FFFFFF;
     text-decoration: underline
 }
 

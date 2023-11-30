@@ -57,17 +57,15 @@
                             <div class="w-100">
 
                                 <div class="d-flex flex-column h-100">
-                                    <div class="mb-4 mb-md-5">
-                                        <a href="index.html" class="d-block auth-logo">
-                                            <!-- <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
-                                            <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light"> -->
-                                            <h1>Luxo Mall</h1>
+                                    <div class="mb-4 mb-md-5 text-center"> 
+                                        <a href="<?= base_url('/dashboard') ?>" class="d-block auth-logo">
+                                            <img src="/assets/images/cok/Frame 29.svg" alt="" class="mx-auto">
                                         </a>
                                     </div>
                                     <div class="my-auto">
                                         
                                         <div>
-                                            <h5 class="text-primary">Selamat Datang</h5>
+                                            <h5 class="text-warning">Selamat Datang</h5>
                                             <p class="text-muted">Masuk Sekarang!</p>
                                         </div>
                                        
@@ -91,7 +89,7 @@
 
                                                 
                                                 <div class="mt-3 d-grid">
-                                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Masuk</button>
+                                                    <button class="btn btn-warning waves-effect waves-light" type="submit">Masuk</button>
                                                 </div>
                                                 <div class="mt-3 float-end">
                                                         <a href="<?= Base_url("/forgot-password")?>" class="text-muted">Lupa password?</a>
@@ -99,10 +97,10 @@
 
                                             </form>
                                             <div class="mt-5 text-center">
-                                                <p>Belum memiliki akun ? <a href="<?= Base_url("/register")?>" class="fw-medium text-primary"> Daftar sekarang </a> </p>
+                                                <p>Belum memiliki akun ? <a href="<?= Base_url("/register")?>" class="fw-medium text-warning"> Daftar sekarang </a> </p>
                                             </div>
                                             <div class="mt-4 mt-md-5 text-center">
-                                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> LuxoMall</p>
+                                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Muhasabah Custom</p>
                                             </div>
                                         </div>
                                     </div>
