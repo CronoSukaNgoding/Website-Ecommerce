@@ -7,9 +7,15 @@ class ProdukDetailController extends BaseController
 {
     public function index($id)
     {
-        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id,GROUP_CONCAT(groupphotoproduk.photo_produk) AS daftar_foto")->join('produk_detail', 'produk_detail.id_produk = produk.id')->
-        join('kategori' ,'kategori.id = produk.id_kategori')->join('sub_kategori' ,'sub_kategori.id = produk.id_sub')->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')->
-        orderBy('produk.created_at', 'DESC')->where('produk.id', $id)->first();
+        $cekdetail = $this->produk->select("*, produk.created_at as tglbuat, produk.id as id,GROUP_CONCAT(groupphotoproduk.photo_produk) AS daftar_foto")
+        ->join('produk_detail', 'produk_detail.id_produk = produk.id')
+        ->join('kategori' ,'kategori.id = produk.id_kategori')
+        ->join('sub_kategori' ,'sub_kategori.id = produk.id_sub')
+        ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
+        ->orderBy('produk.created_at', 'DESC')
+        ->where('produk.id', $id)->first();
+        $komentar = $this->komentar->select('komentar.updated_at as tglBuat, fullname,avatar,komentar')->join('users','users.user_id = komentar.userid','left')->where('produk_id',$id)->get()->getResult();
+        $peringkat = $this->rating->join('users','users.user_id = peringkat_produk.userid')->where('produk_id',$id)->get()->getResult();
         $daftarFotoArray = explode(',', $cekdetail->daftar_foto);
         $linkaddress = $cekdetail->link_address;
         $daftarFotoArray[] = $linkaddress;
@@ -18,6 +24,8 @@ class ProdukDetailController extends BaseController
             'title' => 'Detail Produk',
             'result' => $cekdetail,
             'daftar_foto' => $daftarFotoArray,
+            'komentar' => $komentar,
+            'rating'=>$peringkat
         ];
         // dd($data);
 

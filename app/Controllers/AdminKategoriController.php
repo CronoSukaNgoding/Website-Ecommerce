@@ -7,12 +7,11 @@ class AdminKategoriController extends BaseController
     public function index()
     {    
         $cekkategori = $this->kategori->get()->getResult();
-        $ceksub = $this->kategori->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')->get()->getResult();
+        
         $data =[
             'user' => $this->users->where('user_id', $this->sesi->get('user_id'))->first(),
             'title' => 'Data Kategori',
             'kategori' => $cekkategori,
-            'subkategori' => $ceksub,
             'isUri' => $this->request->uri,
             'sub' => $this->sub_kategori->GetSubKategori(),
         ];
@@ -52,20 +51,7 @@ class AdminKategoriController extends BaseController
     }
 
 
-    public function svsubkategori(){
-            $data = [
-                'id_kategori' => $this->request->getVar('kategori'),      
-                'sub_kategori' => $this->request->getVar('sub_kategori'),
-            ];
-        try {
-            $update = $this->sub_kategori->save($data);
-             $this->sesi->setFlashdata('sukses-tambah', 'Data berhasil ditambah');
-             return redirect()->to('/list-kategori');
-        } catch (\Exception $e) {
-         $e->getMessage();
-        }
-        return view('admin/list-kategori', $data);
-    }
+    
 
     public function deleteKategori($id)
     {   
@@ -141,27 +127,7 @@ class AdminKategoriController extends BaseController
         return view('admin/list-kategori', $data);
     }
 
-    public function updateSub($id){
-        $data = [
-            'id' => $id,
-            'id_kategori' => $this->request->getVar('kategori'),      
-            'sub_kategori' => $this->request->getVar('sub_kategori'),
-        ];
-        try {
-            $update = $this->sub_kategori->save($data);
-            $this->sesi->setFlashdata('sukses-tambah', 'Data berhasil ditambah');
-            return redirect()->to('/list-kategori');
-        } catch (\Exception $e) {
-        $e->getMessage();
-        }
-        return view('backend/absen/index', $data);
-    }
-    public function deleteSubKategori($id)
-    {
-        
-        $this->sub_kategori->delete($id);
-        $this->sesi->setFlashdata('sukses-hapus', 'Data berhasil dihapus');
-        return redirect()->to('/list-kategori');
-    } 
+    
+    
 
 }

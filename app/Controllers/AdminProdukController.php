@@ -149,7 +149,7 @@ class AdminProdukController extends BaseController
         
 
         $cekkategori = $this->kategori->get()->getResult();
-        $ceksub = $this->kategori->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')->get()->getResult();
+        $ceksub = $this->sub_kategori->get()->getResult();
 
        $data =[
            'id' => $id,
@@ -166,8 +166,8 @@ class AdminProdukController extends BaseController
     }
     public function updateProduk($id)
     {   
-        $photoproduk = $this->request->getFile('photo_produk');
-        $cekphotolama = $this->produk->select('photo_produk')->where('id', $id)->get()->getRow();
+        // $photoproduk = $this->request->getFile('photo_produk');
+        // $cekphotolama = $this->produk->select('photo_produk')->where('id', $id)->get()->getRow();
 
         $dataProduk = [
             'id' => $id,

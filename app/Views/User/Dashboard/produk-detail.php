@@ -78,30 +78,32 @@
                                 </button>
                             </a>
 
-                            <!-- <div class="product-color">
-                                <h5 class="font-size-15">Color :</h5>
-                                <a href="javascript: void(0);" class="active">
-                                    <div class="product-color-item border rounded">
-                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-md">
-                                    </div>
-                                    <p>Black</p>
-                                </a>
-                                <a href="javascript: void(0);">
-                                    <div class="product-color-item border rounded">
-                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-md">
-                                    </div>
-                                    <p>Blue</p>
-                                </a>
-                                <a href="javascript: void(0);">
-                                    <div class="product-color-item border rounded">
-                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-md">
-                                    </div>
-                                    <p>Gray</p>
-                                </a>
-                            </div> -->
+                            
                         </div>
                  
                     </div>
+                    <div class="mt-5">
+                        <h5>Komentar :</h5>
+                        <?php
+                        use CodeIgniter\I18n\Time;
+                        ?>
+
+                        <?php foreach($komentar as $komen):?>
+                            <div class="d-flex py-3 border-bottom">
+                                <div class="flex-shrink-0 me-3">
+                                    <img src="<?= base_url('user/avatar/'.$komen->avatar)?>" class="avatar-xs rounded-circle" alt="img" />
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1 font-size-15"><?=$komen->fullname?></h5>
+                                    <p class="text-muted"><?=$komen->komentar?></p>
+                                   
+
+                                    <div class="text-muted font-size-12"><i class="far fa-calendar-alt text-primary me-1"></i> <?= Time::parse($komen->tglBuat)->format('d F Y') ?></div>
+                                </div>
+                            </div>
+                        <?php endforeach?>
+                    </div>                   
 
                 </div>
                 <!-- end row -->

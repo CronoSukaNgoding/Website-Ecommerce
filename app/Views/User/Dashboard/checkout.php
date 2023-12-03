@@ -102,7 +102,7 @@
 					foreach ($result as $value):
 						?>
                                 <tr class="cart-item">
-                                    <th scope="row">
+                                    
                                             <input type="hidden" value="<?=$value->id_produk?>" class="idProduk">
                                             <input type="hidden" value="<?=$value->id_cart?>" class="idCart">
                                             <input type="hidden" value="<?=$value->qty?>" class="qty">
@@ -128,7 +128,7 @@
 					endforeach
 						?>
                                 <tr>
-                                    <td colspan="3" class="text-end fw-bold ">Total:</td>
+                                    <td colspan="2" class="text-end fw-bold ">Total:</td>
                                     <td><?= 'Rp ' . number_format($total, 2, ',', '.'); ?></td>
                                     <input name="total" type="hidden" value="<?= $total?>"class="hargaTotal">
                                 </tr>

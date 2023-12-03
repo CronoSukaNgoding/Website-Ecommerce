@@ -38,9 +38,8 @@
                                 <label class="control-label" for="sub_kategori">Sub Kategori</label>
                                 <select name="sub_kategori" class="form-control select2">
                                     <option>-- Pilih --</option>
-                                    <?php foreach($subkategori as $listsub) : ?>
-                                    <option value="<?= $listsub->id?>"><?= $listsub->sub_kategori?></option>
-                                    <?php endforeach;?>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Custom</option>
                                 </select>
                             </div>
 

@@ -1,45 +1,45 @@
 <?= $this->extend('Template/template') ?>
 <?php $this->section('css');?>
-     <style>
+<style>
+    .card {
+        transition: box-shadow 0.3s ease;
+    }
 
-.card{
-    transition: box-shadow 0.3s ease;
-}
-.card:hover {
-  box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);
-}
+    .card:hover {
+        box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);
+    }
 </style>
 <style>
-        .slideshow-container {
-            max-width: 100%;
-            position: relative;
-            margin: auto;
-        }
+    .slideshow-container {
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+    }
 
-        .mySlides {
-            display: none;
-        }
+    .mySlides {
+        display: none;
+    }
 
-        .dot-container {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .dot-container {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-            cursor: pointer;
-        }
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+        cursor: pointer;
+    }
 
-        .active {
-            background-color: #717171;
-        }
-    </style>
+    .active {
+        background-color: #717171;
+    }
+</style>
 <?php $this->endSection();?>
 
 
@@ -102,17 +102,17 @@
 
 <!-- Awal Kategori -->
 <div class="kategori  mt-3 ">
-<h4>Kategori </h4>
-    <div class="row text-center  ">
-        
+    <h4 class="text-center">Kategori</h4>
+    <div class="row text-center">
         <?php
         foreach ($kategori as $value):
         ?>
-        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-             <div class="card">
+        <div class="col-lg-6">
+            <div class="card">
                 <div class="card-body">
-                     <a href="#" class="kategori-link" data-kategori-id="<?= $value->id ?>">
-                        <img src="<?= base_url('admin/kategori/' . $value->icon) ?>" alt="" class="img-categori mt-3">
+                    <a href="#" class="kategori-link" data-kategori-id="<?= $value->id ?>">
+                        <img src="<?= base_url('admin/kategori/' . $value->icon) ?>" alt="" class="img-categori mt-3"
+                            height="90">
                     </a>
                     <p class="mt-2"><?= $value->kategori ?></p>
                     <input type="hidden" id="kategori-id-<?= $value->id ?>" value="<?= $value->id ?>">
@@ -135,9 +135,6 @@
                 <input type="hidden" id="subKat-id" value="<?= $value->id ?>">
             </div>
         </div>
-
-
-
         <?php
         endforeach;
         ?>
@@ -149,26 +146,26 @@
 
     <div id="produk-container">
         <div class="row">
-            
+
         </div>
     </div>
-    
+
     <!-- end row -->
 
 
-   
+
 </div>
 
 
 <script>
     $.ajax({
         type: "GET",
-        url: "/get-product", 
+        url: "/get-product",
         success: function (response) {
 
-                var data = JSON.parse(response);
-                var newHTML = "";
-                console.log(data);
+            var data = JSON.parse(response);
+            var newHTML = "";
+            console.log(data);
             data.forEach(function (product) {
                 var daftar_foto = product.daftar_foto.split(','); // Memecah string menjadi array
 
@@ -177,9 +174,12 @@
                 var slidesHtml = '';
 
                 for (var i = 0; i < daftar_foto.length; i++) {
-                    indicatorsHtml += '<li data-bs-target="#carouselExampleIndicators' + product.produk + '" data-bs-slide-to="' + i + '" ' + (i === 0 ? 'class="active"' : '') + '></li>';
+                    indicatorsHtml += '<li data-bs-target="#carouselExampleIndicators' + product
+                        .produk + '" data-bs-slide-to="' + i + '" ' + (i === 0 ? 'class="active"' :
+                            '') + '></li>';
                     slidesHtml += '<div class="carousel-item ' + (i === 0 ? 'active' : '') + '">';
-                    slidesHtml += '<img class="d-block img-fluid" src="/admin/produk/' + daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
+                    slidesHtml += '<img class="d-block img-fluid" src="/admin/produk/' +
+                        daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
                     slidesHtml += '</div>';
                 }
                 console.log(daftar_foto);
@@ -204,7 +204,7 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </div>
-                                <h4 class="card-title">${product.nama_produk}</h4>
+                                <h4 class="card-title mt-2">${product.nama_produk}</h4>
                                 <p class="card-text card-produk" id="harga_produk_p">${product.harga_produk}</p>
                                 <p class="card-text card-produk">${product.kategori}</p>
                                 <p class="card-text card-produk">Sisa Stok : ${product.stok}</p>
@@ -231,7 +231,7 @@
             products.forEach(product => {
                 const filledStars = Math.round(product.rata_rata_peringkat);
                 let ratingHTML = '<p class="text-muted float-start me-3">';
-                
+
                 if (filledStars === 0) {
                     ratingHTML += '(Produk ini belum di rating)';
                 } else {
@@ -244,10 +244,11 @@
                     }
                     ratingHTML += ' (' + product.rata_rata_peringkat + ')';
                 }
-                
+
                 ratingHTML += '</p';
-                
-                const produkElements = document.querySelectorAll(`[data-rating="${product.rata_rata_peringkat}"]`);
+
+                const produkElements = document.querySelectorAll(
+                    `[data-rating="${product.rata_rata_peringkat}"]`);
                 produkElements.forEach(produkElement => {
                     produkElement.innerHTML = ratingHTML;
                 });
@@ -258,59 +259,96 @@
         }
     });
     document.addEventListener("DOMContentLoaded", function () {
-        var kategoriLinks = document.querySelectorAll(".kategori-link");      
-        kategoriLinks.forEach(function (link) {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-                var categoryId = link.getAttribute("data-kategori-id");
-                var kategoriId = document.getElementById("kategori-id-" + categoryId).value;
+    var kategoriLinks = document.querySelectorAll(".kategori-link");
+    kategoriLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            var categoryId = link.getAttribute("data-kategori-id");
+            var kategoriId = document.getElementById("kategori-id-" + categoryId).value;
 
-                $.ajax({
-                    type: "GET",
-                    url: "/get-kategori",
-                    data: {
-                        categoryId: kategoriId
-                    },
-                    success: function (response) {
-                        var data = JSON.parse(response);
-                        var newHTML = "";
+            $.ajax({
+                type: "GET",
+                url: "/get-kategori",
+                data: {
+                    categoryId: kategoriId
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var newHTML = "";
 
-                        if(data[0].produk.length != 0){
-                            data[0].produk.forEach(function (product) {
-                            var formattedHarga = "Rp " + parseFloat(product.harga_produk).toLocaleString("id-ID");
+                    
 
-                            newHTML += `
-                                    <div class="col-md-6 col-xl-3">
-                                    <a href="/produk-detail/${product.idProduk}" class="link-card">
-                                        <div class="card" >
-                                        <div class="card-body">
-                                            <img class="card-img-top img-fluid product-img mb-3"
-                                                src="/admin/produk/${product.photo_produk}" alt="Card image cap">
-                                                <h4 class="card-title">${product.nama_produk}</h4>
-                                                <p class="card-text card-produk" id="harga_produk_p">${formattedHarga}</p>
-                                                <p class="card-text card-produk">${product.kategori}</p>
-                                                <p class="card-text card-produk">Sisa Stok : ${product.stok}</p>
-                                                <!-- Tampilkan data peringkat di sini -->
-                                                <div class="rating" data-rating="${product.rata_rata_peringkat}">
-                                                    <!-- Tampilan bintang diisi oleh JavaScript -->
-                                                </div>
-                                                <a onclick="tambahKeranjang(this)" data-kodeproduk="${product.idProduk}"
-                                                    class="btn btn-outline-primary waves-effect waves-light w-lg mt-1 d-flex justify-content-center">
-                                                    <i class="bx bx-cart me-2"></i>Add to cart
-                                                </a>
-                                            </div>
-                                        </div>
+                    if (data[0].produk.length !== 0) {
+                        data[0].produk.forEach(function (product) {
+                            var formattedHarga = "Rp " + parseFloat(
+                                product.harga_produk
+                            ).toLocaleString("id-ID");
+
+                            var daftar_foto = product.daftar_foto.split(','); // Memecah string menjadi array
+
+                // Buat elemen HTML carousel dinamis
+                var indicatorsHtml = '';
+                var slidesHtml = '';
+
+                for (var i = 0; i < daftar_foto.length; i++) {
+                    indicatorsHtml += '<li data-bs-target="#carouselExampleIndicators' + product
+                        .produk + '" data-bs-slide-to="' + i + '" ' + (i === 0 ? 'class="active"' :
+                            '') + '></li>';
+                    slidesHtml += '<div class="carousel-item ' + (i === 0 ? 'active' : '') + '">';
+                    slidesHtml += '<img class="d-block img-fluid" src="/admin/produk/' +
+                        daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
+                    slidesHtml += '</div>';
+                }
+                console.log(daftar_foto);
+                newHTML += `
+                   <div class="col-md-6 col-xl-3">
+                    <a href="/produk-detail/${product.idProduk}" class="link-card">
+                        <div class="card" >
+                        <div class="card-body">
+                            <div id="carouselExampleIndicators${product.produk}" class="carousel slide" data-bs-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        ${indicatorsHtml}
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        ${slidesHtml}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
                                     </a>
                                 </div>
-                            `;
+                                <h4 class="card-title mt-2">${product.nama_produk}</h4>
+                                <p class="card-text card-produk" id="harga_produk_p">${product.harga_produk}</p>
+                                <p class="card-text card-produk">${product.kategori}</p>
+                                <p class="card-text card-produk">Sisa Stok : ${product.stok}</p>
+                                
+                                <!-- Tampilkan data peringkat di sini -->
+                                <div class="rating" data-rating="${product.rata_rata_peringkat}">
+                                    <!-- Tampilan bintang diisi oleh JavaScript -->
+                                </div>
+                                
+                                
+                                <a onclick="tambahKeranjang(this)" data-kodeproduk="${product.produk}"
+                                    class="btn btn-outline-primary waves-effect waves-light w-lg mt-1 d-flex justify-content-center">
+                                    <i class="bx bx-cart me-2"></i>Add to cart
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                `;
                         });
-                    
+
                         $("#produk-container .row").html(newHTML);
                         const products = data[0].produk;
                         products.forEach(product => {
                             const filledStars = Math.round(product.rata_rata_peringkat);
                             let ratingHTML = '<p class="text-muted float-start me-3">';
-                            
+
                             if (filledStars === 0) {
                                 ratingHTML += '(Produk ini belum di rating)';
                             } else {
@@ -323,123 +361,181 @@
                                 }
                                 ratingHTML += ' (' + product.rata_rata_peringkat + ')';
                             }
-                            
-                            ratingHTML += '</p';
-                            
+
+                            ratingHTML += '</p>';
+
                             const produkElements = document.querySelectorAll(`[data-rating="${product.rata_rata_peringkat}"]`);
                             produkElements.forEach(produkElement => {
                                 produkElement.innerHTML = ratingHTML;
                             });
                         });
-                        }else{
-                            newHTML = `
-                                        <div class="d-flex justify-content-center ">
-                                            <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);" >
-                                                <div class="card-body">
-                                                <p class="card-text card-produk" > Mohon maaf produk sedang tidak tersedia :)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                `;
-                            $("#produk-container .row ").html(newHTML);
-                        }
-
-                        
-                    }
-                });
-            });
-        });
-
-        var SubkategoriLinks = document.querySelectorAll(".subKat-link");
-        SubkategoriLinks.forEach(function (link) {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-
-                var SubcategoryId = link.parentElement.querySelector("input#subKat-id").value;
-
-                $.ajax({
-                    type: "GET",
-                    url: "/get-sub-kategori", 
-                    data: {
-                        SubcategoryId: SubcategoryId
-                    },
-                    success: function (response) {
-                        var data = JSON.parse(response);
-                        var newHTML = "";
-
-                        if(data[0].produk.length != 0){
-                            data[0].produk.forEach(function (product) {
-                                var formattedHarga = "Rp " + parseFloat(product.harga_produk).toLocaleString("id-ID");
-                                newHTML += `
-                                        <div class="col-md-6 col-xl-3">
-                                        <a href="/produk-detail/${product.idProduk}" class="link-card">
-                                            <div class="card" >
-                                            <div class="card-body">
-                                                <img class="card-img-top img-fluid product-img mb-3"
-                                                    src="/admin/produk/${product.photo_produk}" alt="Card image cap">
-                                                    <h4 class="card-title">${product.nama_produk}</h4>
-                                                    <p class="card-text card-produk" id="harga_produk_p">${formattedHarga}</p>
-                                                    <p class="card-text card-produk">${product.kategori}</p>
-                                                    <p class="card-text card-produk">Sisa Stok : ${product.stok}</p>
-                                                    <!-- Tampilkan data peringkat di sini -->
-                                                    <div class="rating" data-rating="${product.rata_rata_peringkat}">
-                                                        <!-- Tampilan bintang diisi oleh JavaScript -->
-                                                    </div>
-                                                    <a onclick="tambahKeranjang(this)" data-kodeproduk="${product.idProduk}"
-                                                        class="btn btn-outline-primary waves-effect waves-light w-lg mt-1 d-flex justify-content-center">
-                                                        <i class="bx bx-cart me-2"></i>Add to cart
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </a>
+                    } else{
+                        newHTML = `
+                            <div class="d-flex justify-content-center">
+                                <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);">
+                                    <div class="card-body">
+                                        <p class="card-text card-produk"> Mohon maaf produk sedang tidak tersedia :)</p>
                                     </div>
-                                `;
-                            });
-
-                            $("#produk-container .row").html(newHTML);
-                            const products = data[0].produk;
-                            products.forEach(product => {
-                                const filledStars = Math.round(product.rata_rata_peringkat);
-                                let ratingHTML = '<p class="text-muted float-start me-3">';
-                                
-                                if (filledStars === 0) {
-                                    ratingHTML += '(Produk ini belum di rating)';
-                                } else {
-                                    for (let i = 0; i < 5; i++) {
-                                        if (i < filledStars) {
-                                            ratingHTML += '<span class="bx bxs-star text-warning"></span>';
-                                        } else {
-                                            ratingHTML += '<span class="bx bxs-star"></span>';
-                                        }
-                                    }
-                                    ratingHTML += ' (' + product.rata_rata_peringkat + ')';
-                                }
-                                
-                                ratingHTML += '</p';
-                                
-                                const produkElements = document.querySelectorAll(`[data-rating="${product.rata_rata_peringkat}"]`);
-                                produkElements.forEach(produkElement => {
-                                    produkElement.innerHTML = ratingHTML;
-                                });
-                            });
-                        }else{
-                            newHTML = `
-                                       <div class="d-flex justify-content-center ">
-                                            <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);"  >
-                                                <div class="card-body">
-                                                <p class="card-text card-produk" > Mohon maaf produk sedang tidak tersedia :)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                `;
-                            $("#produk-container .row ").html(newHTML);
-                        }
+                                </div>
+                            </div>
+                        `;
+                        $("#produk-container .row").html(newHTML);
                     }
-                });
+                },
+                error: function (error) {
+                    newHTML = `
+                        <div class="d-flex justify-content-center">
+                            <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);">
+                                <div class="card-body">
+                                    <p class="card-text card-produk"> Mohon maaf produk sedang tidak tersedia :)</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $("#produk-container .row").html(newHTML);
+                }
             });
         });
-
     });
+    var SubkategoriLinks = document.querySelectorAll(".subKat-link");
+    SubkategoriLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            var SubcategoryId = link.parentElement.querySelector("input#subKat-id").value;
+
+            $.ajax({
+                type: "GET",
+                url: "/get-sub-kategori", 
+                data: {
+                    SubcategoryId: SubcategoryId
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    console.log(data);
+                    var newHTML = "";
+
+                    if (data[0].produk.length !== 0) {
+                        data[0].produk.forEach(function (product) {
+                            var formattedHarga = "Rp " + parseFloat(
+                                product.harga_produk
+                            ).toLocaleString("id-ID");
+
+                            var daftar_foto = product.daftar_foto.split(','); // Memecah string menjadi array
+
+                // Buat elemen HTML carousel dinamis
+                var indicatorsHtml = '';
+                var slidesHtml = '';
+
+                for (var i = 0; i < daftar_foto.length; i++) {
+                    indicatorsHtml += '<li data-bs-target="#carouselExampleIndicators' + product
+                        .produk + '" data-bs-slide-to="' + i + '" ' + (i === 0 ? 'class="active"' :
+                            '') + '></li>';
+                    slidesHtml += '<div class="carousel-item ' + (i === 0 ? 'active' : '') + '">';
+                    slidesHtml += '<img class="d-block img-fluid" src="/admin/produk/' +
+                        daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
+                    slidesHtml += '</div>';
+                }
+                console.log(daftar_foto);
+                newHTML += `
+                   <div class="col-md-6 col-xl-3">
+                    <a href="/produk-detail/${product.idProduk}" class="link-card">
+                        <div class="card" >
+                        <div class="card-body">
+                            <div id="carouselExampleIndicators${product.produk}" class="carousel slide" data-bs-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        ${indicatorsHtml}
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        ${slidesHtml}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators${product.produk}" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <h4 class="card-title mt-2">${product.nama_produk}</h4>
+                                <p class="card-text card-produk" id="harga_produk_p">${product.harga_produk}</p>
+                                <p class="card-text card-produk">${product.kategori}</p>
+                                <p class="card-text card-produk">Sisa Stok : ${product.stok}</p>
+                                
+                                <!-- Tampilkan data peringkat di sini -->
+                                <div class="rating" data-rating="${product.rata_rata_peringkat}">
+                                    <!-- Tampilan bintang diisi oleh JavaScript -->
+                                </div>
+                                
+                                
+                                <a onclick="tambahKeranjang(this)" data-kodeproduk="${product.produk}"
+                                    class="btn btn-outline-primary waves-effect waves-light w-lg mt-1 d-flex justify-content-center">
+                                    <i class="bx bx-cart me-2"></i>Add to cart
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                `;
+                        });
+
+                        $("#produk-container .row").html(newHTML);
+                        const products = data[0].produk;
+                        products.forEach(product => {
+                            const filledStars = Math.round(product.rata_rata_peringkat);
+                            let ratingHTML = '<p class="text-muted float-start me-3">';
+
+                            if (filledStars === 0) {
+                                ratingHTML += '(Produk ini belum di rating)';
+                            } else {
+                                for (let i = 0; i < 5; i++) {
+                                    if (i < filledStars) {
+                                        ratingHTML += '<span class="bx bxs-star text-warning"></span>';
+                                    } else {
+                                        ratingHTML += '<span class="bx bxs-star"></span>';
+                                    }
+                                }
+                                ratingHTML += ' (' + product.rata_rata_peringkat + ')';
+                            }
+
+                            ratingHTML += '</p>';
+
+                            const produkElements = document.querySelectorAll(`[data-rating="${product.rata_rata_peringkat}"]`);
+                            produkElements.forEach(produkElement => {
+                                produkElement.innerHTML = ratingHTML;
+                            });
+                        });
+                    } else{
+                        newHTML = `
+                            <div class="d-flex justify-content-center">
+                                <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);">
+                                    <div class="card-body">
+                                        <p class="card-text card-produk"> Mohon maaf produk sedang tidak tersedia :)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $("#produk-container .row").html(newHTML);
+                    }
+                },
+                error: function (error) {
+                    newHTML = `
+                        <div class="d-flex justify-content-center">
+                            <div class="card" style="box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);">
+                                <div class="card-body">
+                                    <p class="card-text card-produk"> Mohon maaf produk sedang tidak tersedia :)</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $("#produk-container .row").html(newHTML);
+                }
+            });
+        });
+    });
+});
+
 </script>
 
 
