@@ -130,8 +130,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="myModalLabel35"> Apakah anda yakin untuk men-Checkout barang ini ?</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5  id="myModalLabel35"> Apakah anda yakin untuk men-Checkout barang ini ?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
@@ -269,9 +271,95 @@ $('.accesLayanan').each(function(index) {
         }
     });
 });
+const quantityInputs = document.querySelectorAll('.jmlbarang');
+const hargaProdukElements = document.querySelectorAll('.harga_produk');
+const ongkirResultElements = document.querySelectorAll('[id^="ongkirResult"]');
+const grandTotalElement = document.getElementById('grandTotal');
 
+updateGrandTotal();
+
+quantityInputs.forEach((input, index) => {
+    input.addEventListener('change', () => {
+        updateGrandTotal();
+    });
+
+    const decrementBtn = input.previousElementSibling;
+    const incrementBtn = input.nextElementSibling;
+
+    decrementBtn.addEventListener('click', () => {
+        if (input.value > 1) {
+            input.value = parseInt(input.value) - 1;
+            updateGrandTotal();
+        }
+    });
+
+    incrementBtn.addEventListener('click', () => {
+        input.value = parseInt(input.value) + 1;
+        updateGrandTotal();
+    });
+});
+
+function formatRupiah(number) {
+    const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR'
+    });
+    return formatter.format(number);
+}
+
+function updateOngkir(select, index) {
+
+    const selectedValue = select.value;
+    const ongkirResultElement = ongkirResultElements[index];
+
+
+    const ongkirText = ongkirResultElement.textContent;
+    const ongkirValue = parseFloat(ongkirText.replace('Ongkir: Rp ', '').replace(',', '')) || 0;
+
+
+    ongkirResultElement.textContent = "Ongkir: Rp " + selectedValue + " (" + ongkirText.split('(')[1];
+    updateGrandTotal();
+}
+
+function updateGrandTotal() {
+    let totalHargaProduk = 0;
+    let totalOngkir = 0;
+
+    hargaProdukElements.forEach((hargaProdukElement, index) => {
+        const price = parseFloat(hargaProdukElement.textContent.trim());
+        const quantity = parseInt(quantityInputs[index].value);
+        totalHargaProduk += price * quantity;
+
+
+        const ongkirResultElement = ongkirResultElements[index];
+        const ongkirText = ongkirResultElement.textContent;
+        const ongkirValue = parseFloat(ongkirText.replace('Ongkir: Rp ', '').replace(',', '')) || 0;
+        totalOngkir += ongkirValue;
+    });
+
+    const grandTotal = totalHargaProduk + totalOngkir;
+    grandTotalElement.textContent = formatRupiah(grandTotal);
+}
+
+const input = document.getElementById("jmlbarang");
+    const incrementBtn = document.getElementById("increment-btn");
+    const decrementBtn = document.getElementById("decrement-btn");
+
+    incrementBtn.addEventListener("click", () => {
+        if (input.value >= 1) {
+            input.value++;
+        }
+    });
+
+    decrementBtn.addEventListener("click", () => {
+        if (input.value > 1) {
+            input.value--;
+        }
+    });
 
 </script>
+
+
 
 
 

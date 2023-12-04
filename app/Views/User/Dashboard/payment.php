@@ -1,4 +1,4 @@
-<?= $this->extend('Template/template') ?>
+<?= $this->extend('Template/template-bayar') ?>
 
 <?= $this->section('IsKonten') ?>
 

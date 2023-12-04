@@ -41,7 +41,7 @@
                                                                         <iframe class="d-block w-100"  width="315" height="360" src="<?= $daftar_foto[$i] ?>" frameborder="0" allowfullscreen></iframe>
                                                                     <?php else : ?>
                                                                         <!-- Jika bukan URL, tampilkan gambar -->
-                                                                        <img class="d-block img-fluid" src="/admin/produk/<?= $daftar_foto[$i] ?>" alt="Slide <?= ($i + 1) ?>">
+                                                                        <img class="d-block img-fluid" src="<?=base_url()?>/admin/produk/<?= $daftar_foto[$i] ?>" alt="Slide <?= ($i + 1) ?>">
                                                                     <?php endif; ?>
                                                                 </div>
                                                             <?php endfor; ?>

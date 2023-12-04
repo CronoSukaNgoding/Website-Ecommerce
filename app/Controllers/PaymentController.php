@@ -21,7 +21,7 @@ class PaymentController extends BaseController
             'profile' => $user,
             'result' => $prepayment,
         ];
-        return view('User/Dashboard/Payment', $data);
+        return view('User/Dashboard/payment', $data);
     
     }
 

@@ -94,13 +94,20 @@ class ProdukDetailController extends BaseController
         
         if (!empty($dataCart)) {
             foreach ($dataCart as $listData) {
-                $produk = $this->produk->where('id', $listData->id_produk)->first(); 
+                $produk = $this->produk->select('*,produk.id as idProduk, GROUP_CONCAT(DISTINCT groupphotoproduk.photo_produk) AS daftar_foto')->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')->where('produk.id', $listData->id_produk)
+                ->first(); 
         
                 if ($produk) {
                     $totalHarga += $produk->harga_produk;
+                    // Use explode() instead of split()
+                    $daftar_foto = explode(',', $produk->daftar_foto);
+                    
+                    // Access the first element of the array
+                    $firstPhoto = isset($daftar_foto[0]) ? $daftar_foto[0] : null;
                     $output[] = [
                         'nama_produk' => $produk->nama_produk,
                         'harga_produk' => $produk->harga_produk,
+                        'photo_produk'=> $firstPhoto
                     ];
                 }
             }

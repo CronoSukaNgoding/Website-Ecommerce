@@ -45,7 +45,7 @@ class CartController extends BaseController
             'keranjang' => $uniqueProductList,
         ];
 
-        return view('User/Dashboard/Cart', $data);
+        return view('User/Dashboard/cart', $data);
 
     
     }
@@ -185,4 +185,30 @@ class CartController extends BaseController
 
    
     }  
+
+
+    public function delCheckout($id) {
+        $qtydiambil = $this->checkout->where('id_checkout', $id)->get()->getResult();
+       
+        foreach ($qtydiambil as $hapusqty) {
+             $produk = $this->produk->select('*, produk_detail.id as idprodukdetail, produk_detail.stok as stokproduk')
+                ->join('produk_detail', 'produk_detail.id_produk = produk.id')
+                ->where('produk.id', $hapusqty->id_produk)
+                ->first();
+
+            $stok_asli = $produk->stokproduk + $hapusqty->qty; 
+            $datacek = [
+                'id' => $produk->idprodukdetail,
+                'stok' => $stok_asli
+            ];
+
+            $this->produk_detail->save($datacek);
+            
+            
+            $this->checkout->delete($hapusqty->id);
+        }
+
+        return redirect()->to('/dashboard');
+    }
+
 }

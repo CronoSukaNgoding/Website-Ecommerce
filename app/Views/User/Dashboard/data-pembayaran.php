@@ -11,6 +11,7 @@
                 <table id="categoryTable"class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Barang</th>
                             <th>Jumlah</th>
@@ -34,7 +35,14 @@
 <script src="/assets/js/service/generateTable.js"></script>
 <script>
     $(document).ready(function () {
-        var columns = [{
+        var columns = [
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    return meta.row + 1;
+                }
+            },
+            {
                 data: 'fullname',
             },
             {

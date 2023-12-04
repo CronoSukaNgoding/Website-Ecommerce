@@ -67,6 +67,11 @@
 <script href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"></script>
 <script href="https://code.jquery.com/jquery-3.7.0.js"></script>
 
+
+
+<!-- Bootstrap JS Bundle (Bootstrap + Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     
     <?php $this->renderSection('css');?>
     
@@ -157,10 +162,6 @@
 <body data-topbar="light" data-layout="horizontal">
     <!-- Begin page -->
     <div id="layout-wrapper">
-        <?= $this->include('Template/header'); ?>
-         <?php if ($_SESSION['role'] == 1) : ?>
-            <?= $this->include('Template/topnav'); ?>
-        <?php endif ?>
     
         <div class="main-content ">
             <div class="page-content">
@@ -177,23 +178,4 @@
         </div>
         <!-- End Page-content -->
     </div>
-    <?= $this->include('Template/library'); ?>
-    <script>
-         $('#tampilProduk').load("seeCart", function () {
-            var itemLi = $('.', this).length;
-            if (itemLi > 0) {
-                $('#jumlahItem').html(itemLi);
-            } else {
-                $('#jumlahItem').html(itemLi);
-                var $default = $(
-                    '<div class="p-2 border-top d-grid">'
-                        '<a class="btn btn-sm btn-link font-size-14 text-center" href="'. base_url('checkout') . '">'
-                            '<i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">Checkout</span> 
-                        '</a>'
-                    '</div>''
-                );
-                $('#tampilProduk').append($default);
-            }
-        });
-    </script>
 </body>

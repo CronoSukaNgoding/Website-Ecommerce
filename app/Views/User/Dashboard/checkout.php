@@ -1,4 +1,4 @@
-<?= $this->extend('Template/template') ?>
+<?= $this->extend('Template/template-bayar') ?>
 
 <?= $this->section('IsKonten') ?>
 
@@ -23,8 +23,7 @@
                                 <h4 class="card-title">Shipping information</h4>
                                 <p class="card-title-desc">Fill all information below</p>
 
-                                <form action="" method="post"
-                                    enctype="multipart/form-data">
+                                <form action="" method="post" enctype="multipart/form-data">
                                     <div class="form-group row mb-4">
                                         <label for="billing-name" class="col-md-2 col-form-label">Name</label>
                                         <div class="col-md-10">
@@ -63,17 +62,17 @@
                                         </div>
                                     </div>
                                 </form>
-                                    <hr color="grey" size="5px" />
+                                <hr color="grey" size="5px" />
 
-                                    <div class="form-group row mb-0">
-                                        <label  class="col-md-2 col-form-label">Order
-                                            Notes:</label>
-                                        <div class="col-md-10">
-                                            <textarea class="form-control notes" id="notes" name="notes" rows="3"
-                                                placeholder="Write some note.."></textarea>
-                                        </div>
+                                <div class="form-group row mb-0">
+                                    <label class="col-md-2 col-form-label">Order
+                                        Notes:</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control notes" id="notes" name="notes" rows="3"
+                                            placeholder="Write some note.."></textarea>
                                     </div>
-                                
+                                </div>
+
                             </div>
 
                         </div>
@@ -102,10 +101,10 @@
 					foreach ($result as $value):
 						?>
                                 <tr class="cart-item">
-                                    
-                                            <input type="hidden" value="<?=$value->id_produk?>" class="idProduk">
-                                            <input type="hidden" value="<?=$value->id_cart?>" class="idCart">
-                                            <input type="hidden" value="<?=$value->qty?>" class="qty">
+
+                                    <input type="hidden" value="<?=$value->id_produk?>" class="idProduk">
+                                    <input type="hidden" value="<?=$value->id_cart?>" class="idCart">
+                                    <input type="hidden" value="<?=$value->qty?>" class="qty">
                                     <td>
                                         <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html"
                                                 class="text-dark"><?= $value->nama_produk?></a></h5>
@@ -117,8 +116,9 @@
                                         echo 'Rp ' . number_format($subtotal, 2, ',', '.');
                                         $total += $subtotal;
                                         ?></td>
-                                        
-                                    <input name="id_checkout" type="hidden" class="idCheckout" value="<?= $value->idcekot?>">
+
+                                    <input name="id_checkout" type="hidden" class="idCheckout"
+                                        value="<?= $value->idcekot?>">
 
                                 </tr>
 
@@ -130,7 +130,7 @@
                                 <tr>
                                     <td colspan="2" class="text-end fw-bold ">Total:</td>
                                     <td><?= 'Rp ' . number_format($total, 2, ',', '.'); ?></td>
-                                    <input name="total" type="hidden" value="<?= $total?>"class="hargaTotal">
+                                    <input name="total" type="hidden" value="<?= $total?>" class="hargaTotal">
                                 </tr>
                             </tbody>
 
@@ -140,23 +140,42 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-sm-6">
-                <a href="<?= base_url('dashboard')?>" class="btn text-muted d-none d-sm-inline-block btn-link">
-                    <i class="mdi mdi-arrow-left me-1"></i> Back to Shopping Cart </a>
-            </div> <!-- end col -->
-            <div class="col-sm-6">
-                <div class="text-end">
-                    <button type="submit" class="btn btn-success" onclick="savePrePaymentItemsToServer(this)">
-                        <i class="mdi mdi-truck-fast me-1"></i> Proceed to Shipping
-                    </button>
-                </div>
-            </div> <!-- end col -->
-        </div> <!-- end row -->
-        
+        <div class="col-sm-12 mt-4">
+            <div class="text-end">
+                <!-- Button Triggering Modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#confirmationModal">Batal</button>
+                <button type="submit" class="btn btn-success" onclick="savePrePaymentItemsToServer(this)">
+                    <i class="mdi mdi-truck-fast me-1"></i> Proceed to Shipping
+                </button>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- Modal Structure -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="<?= base_url('/checkout/del/').$id?>" method="POST">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk tidak melanjutkan pembayaran?
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <!-- Make sure to prevent conflicts by changing the ID of the submit button -->
+                <button type="submit" class="btn btn-primary">Yakin</button>
+            </div>
+        </div>
+    </div>
+    </form>
 </div>
+
 <!-- end row -->
 <script>
 function savePrePaymentItemsToServer() {

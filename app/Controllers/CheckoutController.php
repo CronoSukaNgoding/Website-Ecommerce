@@ -20,8 +20,9 @@ class CheckoutController extends BaseController
             'title' => 'Checkout',
             'profile' => $user,
             'result' => $checkout,
+            'id'=>$id
         ];
-        return view('User/Dashboard/Checkout', $data);
+        return view('User/Dashboard/checkout', $data);
     
     }
     public function svprepayment(){

@@ -41,9 +41,11 @@ class getKategori extends BaseController
 
             if (!empty($searchTerm)) {
                 try {
-                    $produk = $this->produk->like('nama_produk', $searchTerm, 'both')->get()->getResult();
+                    $produk = $this->produk->select('*,GROUP_CONCAT(DISTINCT groupphotoproduk.photo_produk) AS daftar_foto')->like('nama_produk', $searchTerm, 'both')
+                    ->join('groupphotoproduk','groupphotoproduk.id_produk = produk.id')
+                    ->get()->getResult();
 
-                    if (!empty($produk)) {
+                    if (!empty($produk) && array_filter((array)$produk[0])) {
                         return json_encode($produk);
                     } else {
                         echo "<p>Tidak ada produk yang cocok dengan kata kunci pencarian.</p>";

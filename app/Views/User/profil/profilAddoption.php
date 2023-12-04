@@ -81,7 +81,7 @@
 
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                        <button type="button" class="btn btn-danger waves-effect waves-light">Batal</button>
+                         <a href="<?= base_url('/dashboard')?>"><button type="button" class="btn btn-danger waves-effect waves-light">Batal</button></a>
                     </div>
                 </form>
                 

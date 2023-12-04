@@ -182,19 +182,34 @@ class AdminProdukController extends BaseController
             if (!empty($produkData)) {
                 $this->produk->update($id, $dataProduk);
                 $cekData = $this->produk_detail->where('id_produk', $id)->first();
+                $stok =$this->request->getVar('stok');
+                if(!empty($stok)){
+                    $dataDetail = [
+                        'id_produk' => $id,
+                        'keterangan' => $this->request->getVar('keterangan'),
+                        'stok' => $this->request->getVar('stok'),
+                        'link_address' =>  $this->request->getVar('link_address'), 
+                    ];
 
-                $dataDetail = [
-                    'id_produk' => $id,
-                    'keterangan' => $this->request->getVar('keterangan'),
-                    'stok' => $this->request->getVar('stok'),
-                     'link_address' =>  $this->request->getVar('link_address'), 
-                ];
+                    if (!empty($cekData)) {
+                        $this->produk_detail->update($cekData->id, $dataDetail);
+                    } else {
+                        $this->produk_detail->insert($dataDetail);
+                    }
+                }else{
+                    $dataDetail = [
+                        'id_produk' => $id,
+                        'keterangan' => $this->request->getVar('keterangan'),
+                        'link_address' =>  $this->request->getVar('link_address'), 
+                    ];
 
-                if (!empty($cekData)) {
-                    $this->produk_detail->update($cekData->id, $dataDetail);
-                } else {
-                    $this->produk_detail->insert($dataDetail);
+                    if (!empty($cekData)) {
+                        $this->produk_detail->update($cekData->id, $dataDetail);
+                    } else {
+                        $this->produk_detail->insert($dataDetail);
+                    }
                 }
+                
 
                 $this->sesi->setFlashdata('sukses', 'Data berhasil diubah');
                 return redirect()->to('/list-produk');

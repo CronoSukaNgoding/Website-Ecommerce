@@ -93,6 +93,7 @@ $routes->post('cart/delete/(:any)', 'CartController::deletecart/$1',['filter' =>
 //checkout
 $routes->post('checkout/save', 'CartController::svcheckout',['filter' => 'role:admin,user']);
 $routes->post('checkout/pre-payment', 'CheckoutController::svprepayment',['filter' => 'role:admin,user']);
+$routes->post('checkout/del/(:any)', 'CartController::delcheckout/$1',['filter' => 'role:admin,user']);
 
 //payment
 $routes->get('payment/(:any)', 'PaymentController::Payment/$1',['filter' => 'role:admin,user']);

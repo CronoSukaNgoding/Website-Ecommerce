@@ -30,7 +30,7 @@
 
 
 <!-- jquery step -->
-<script src="/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+<!-- <script src="/assets/libs/jquery-steps/build/jquery.steps.min.js"></script> -->
 <!-- <script src="{{assets('/libs/jquery-steps/build/jquery.steps.min.js}}"></script> -->
 
 <script src="/assets/js/pages/job-list.init.js"></script>
@@ -47,8 +47,8 @@
 <script src="/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
 <script src="/assets/libs/jszip/jszip.min.js"></script>
-<script src="/assets/libs/pdfmake/build/pdfmake.min.js"></script>
-<script src="/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<!-- <script src="/assets/libs/pdfmake/build/pdfmake.min.js"></script> -->
+<!-- <script src="/assets/libs/pdfmake/build/vfs_fonts.js"></script> -->
 <script src="/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script src="/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
@@ -65,10 +65,10 @@
 
 
 <!-- toastr plugin -->
-<script src="/assets/libs/toastr/build/toastr.min.js"></script>
+<!-- <script src="/assets/libs/toastr/build/toastr.min.js"></script> -->
 
 <!-- toastr init -->
-<script src="/assets/js/pages/toastr.init.js"></script>
+<!-- <script src="/assets/js/pages/toastr.init.js"></script> -->
 
 <script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
 <script src="/assets/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
@@ -92,97 +92,6 @@
 
 
 
-
-<script>
-    const quantityInputs = document.querySelectorAll('.jmlbarang');
-    const hargaProdukElements = document.querySelectorAll('.harga_produk');
-    const ongkirResultElements = document.querySelectorAll('[id^="ongkirResult"]');
-    const grandTotalElement = document.getElementById('grandTotal');
-
-    updateGrandTotal();
-
-    quantityInputs.forEach((input, index) => {
-        input.addEventListener('change', () => {
-            updateGrandTotal();
-        });
-
-        const decrementBtn = input.previousElementSibling;
-        const incrementBtn = input.nextElementSibling;
-
-        decrementBtn.addEventListener('click', () => {
-            if (input.value > 1) {
-                input.value = parseInt(input.value) - 1;
-                updateGrandTotal();
-            }
-        });
-
-        incrementBtn.addEventListener('click', () => {
-            input.value = parseInt(input.value) + 1;
-            updateGrandTotal();
-        });
-    });
-
-    function formatRupiah(number) {
-        const formatter = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR'
-        });
-        return formatter.format(number);
-    }
-
-    function updateOngkir(select, index) {
-
-        const selectedValue = select.value;
-        const ongkirResultElement = ongkirResultElements[index];
-
-
-        const ongkirText = ongkirResultElement.textContent;
-        const ongkirValue = parseFloat(ongkirText.replace('Ongkir: Rp ', '').replace(',', '')) || 0;
-
-
-        ongkirResultElement.textContent = "Ongkir: Rp " + selectedValue + " (" + ongkirText.split('(')[1];
-        updateGrandTotal();
-    }
-
-    function updateGrandTotal() {
-        let totalHargaProduk = 0;
-        let totalOngkir = 0;
-
-        hargaProdukElements.forEach((hargaProdukElement, index) => {
-            const price = parseFloat(hargaProdukElement.textContent.trim());
-            const quantity = parseInt(quantityInputs[index].value);
-            totalHargaProduk += price * quantity;
-
-
-            const ongkirResultElement = ongkirResultElements[index];
-            const ongkirText = ongkirResultElement.textContent;
-            const ongkirValue = parseFloat(ongkirText.replace('Ongkir: Rp ', '').replace(',', '')) || 0;
-            totalOngkir += ongkirValue;
-        });
-
-        const grandTotal = totalHargaProduk + totalOngkir;
-        grandTotalElement.textContent = formatRupiah(grandTotal);
-    }
-</script>
-
-
-<script>
-    const input = document.getElementById("jmlbarang");
-    const incrementBtn = document.getElementById("increment-btn");
-    const decrementBtn = document.getElementById("decrement-btn");
-
-    incrementBtn.addEventListener("click", () => {
-        if (input.value >= 1) {
-            input.value++;
-        }
-    });
-
-    decrementBtn.addEventListener("click", () => {
-        if (input.value > 1) {
-            input.value--;
-        }
-    });
-</script>
 
 <script>
     var tdsHarga = document.querySelectorAll("#harga_produk_p");
@@ -213,7 +122,6 @@
 
                 var message = data.message;
                 toastr.success(data.message);
-                console.log(message);
                 getCart();
 
                 $('body').alert({
@@ -269,6 +177,7 @@
                 <li class="list-group-item listItem">
                     <div class="product-item d-flex align-items-center">
                        
+                    <img class="avatar-sm" src="/admin/produk/${item.photo_produk}" alt="Product Image">
                         <div class="product-details ms-3">
                             <h5 class="product-name">${item.nama_produk}</h5>
                             <p class="product-price">Rp ${parseFloat(item.harga_produk).toLocaleString('id-ID')}</p>
@@ -325,8 +234,6 @@
             },
             dataType: "json",
             success: function (response) {
-                console.log(keyword);
-
                 var searchResults = $("#searchResults");
                 searchResults.empty();
 
@@ -338,10 +245,12 @@
 
                     for (var i = 0; i < response.length; i++) {
                         var item = response[i];
+                        var daftar_foto = item.daftar_foto.split(',');
+                        var firstPhoto = daftar_foto[0];
 
 
                         var listItem = $("<a>")
-                            .attr("href", "/produk-detail/" + item.id) 
+                            .attr("href", "/produk-detail/" + item.id_produk) 
                             .addClass("list-group-item listItem")
                             .addClass("text-decoration-none") 
                             .css("color", "inherit"); 
@@ -349,6 +258,10 @@
         
                         var productItem = $("<div>").addClass("product-item d-flex align-items-center");
 
+                        var productImage = $("<img>")
+                            .addClass("avatar-sm")
+                            .attr("src", "/admin/produk/" + firstPhoto)
+                            .attr("alt", "Product Image");
       
 
 
@@ -364,7 +277,7 @@
 
                      
                         productDetails.append(productName, productPrice);
-                        productItem.append( productDetails);
+                        productItem.append(productImage, productDetails);
                         listItem.append(productItem);
 
                       
@@ -376,15 +289,15 @@
                 } else {
                    
                     var noResultsMessage = `<ul class="list-group list-group-flush">
-                <li class="list-group-item listItem">
-                    <div class="product-item d-flex align-items-center">
-                        <div class="product-details ms-3">
-                            <p class="product-name" style="margin-top:10px; margin-bottom: 10px; padding-left: 10px;">Mohon input terlebih dahulu.</p>
-                        </div>
-                    </div>
-                </li>
-            
-        </ul>`
+                                                    <li class="list-group-item listItem">
+                                                        <div class="product-item d-flex align-items-center">
+                                                            <div class="product-details ms-3">
+                                                                <p class="product-name" style="margin-top:10px; margin-bottom: 10px; padding-left: 10px;">Mohon input terlebih dahulu.</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                
+                                            </ul>`
                     searchResults.append(noResultsMessage);
                 }
             },

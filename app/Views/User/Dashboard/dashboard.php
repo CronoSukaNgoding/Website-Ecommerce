@@ -8,6 +8,10 @@
     .card:hover {
         box-shadow: 3px 3px 10px rgba(211, 211, 211, 1);
     }
+
+    .subKat-link a:hover{
+        color: #000;
+    }
 </style>
 <style>
     .slideshow-container {
@@ -49,17 +53,17 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide col-xl-8" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img class="d-block img-fluid img-dark" src="assets/images/small/img-6.jpg" alt="First slide">
+                <img class="d-block img-fluid img-dark" src="<?=base_url()?>assets/images/small/img-6.jpg" alt="First slide">
                 <a class="btn btn-lg btn-outline-warning waves-effect waves-light btn-on-image"
                     style="width: 200px">Beli Sekarang</a>
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid img-dark" src="assets/images/small/img-2.jpg" alt="Second slide">
+                <img class="d-block img-fluid img-dark" src="<?=base_url()?>assets/images/small/img-2.jpg" alt="Second slide">
                 <a class="btn btn-lg btn-outline-warning waves-effect waves-light btn-on-image"
                     style="width: 200px">Beli Sekarang</a>
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid img-dark" src="assets/images/small/img-3.jpg" alt="Third slide">
+                <img class="d-block img-fluid img-dark" src="<?=base_url()?>assets/images/small/img-3.jpg" alt="Third slide">
                 <a class="btn btn-lg btn-outline-warning waves-effect waves-light btn-on-image"
                     style="width: 200px">Beli Sekarang</a>
             </div>
@@ -108,15 +112,15 @@
         foreach ($kategori as $value):
         ?>
         <div class="col-lg-6">
+            <a href="#" class="kategori-link" data-kategori-id="<?= $value->id ?>">
             <div class="card">
                 <div class="card-body">
-                    <a href="#" class="kategori-link" data-kategori-id="<?= $value->id ?>">
                         <img src="<?= base_url('admin/kategori/' . $value->icon) ?>" alt="" class="img-categori mt-3"
                             height="90">
-                    </a>
-                    <p class="mt-2"><?= $value->kategori ?></p>
-                    <input type="hidden" id="kategori-id-<?= $value->id ?>" value="<?= $value->id ?>">
-                </div>
+                            <p class="mt-2"><?= $value->kategori ?></p>
+                            <input type="hidden" id="kategori-id-<?= $value->id ?>" value="<?= $value->id ?>">
+                        </div>
+            </a>
             </div>
 
         </div>
@@ -131,7 +135,7 @@
             ?>
         <div class="col-lg-2 col-md-3 col-sm-4 col-6">
             <div class="menu-subKat">
-                <a href="#" class="subKat-link"><?= $value->sub_kategori?></a>
+                <a href="#" class="subKat-link "><?= $value->sub_kategori?></a>
                 <input type="hidden" id="subKat-id" value="<?= $value->id ?>">
             </div>
         </div>
@@ -165,7 +169,6 @@
 
             var data = JSON.parse(response);
             var newHTML = "";
-            console.log(data);
             data.forEach(function (product) {
                 var daftar_foto = product.daftar_foto.split(','); // Memecah string menjadi array
 
@@ -182,13 +185,12 @@
                         daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
                     slidesHtml += '</div>';
                 }
-                console.log(daftar_foto);
                 newHTML += `
                    <div class="col-md-6 col-xl-3">
                     <a href="/produk-detail/${product.produk}" class="link-card">
                         <div class="card" >
                         <div class="card-body">
-                            <div id="carouselExampleIndicators${product.produk}" class="carousel slide" data-bs-ride="carousel">
+                            <div id="carouselExampleIndicators${product.produk}" class="carousel slide"  data-bs-ride="carousel">
                                     <ol class="carousel-indicators">
                                         ${indicatorsHtml}
                                     </ol>
@@ -299,7 +301,6 @@
                         daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
                     slidesHtml += '</div>';
                 }
-                console.log(daftar_foto);
                 newHTML += `
                    <div class="col-md-6 col-xl-3">
                     <a href="/produk-detail/${product.idProduk}" class="link-card">
@@ -412,7 +413,6 @@
                 },
                 success: function (response) {
                     var data = JSON.parse(response);
-                    console.log(data);
                     var newHTML = "";
 
                     if (data[0].produk.length !== 0) {
@@ -436,7 +436,6 @@
                         daftar_foto[i] + '" alt="Slide ' + (i + 1) + '">';
                     slidesHtml += '</div>';
                 }
-                console.log(daftar_foto);
                 newHTML += `
                    <div class="col-md-6 col-xl-3">
                     <a href="/produk-detail/${product.idProduk}" class="link-card">

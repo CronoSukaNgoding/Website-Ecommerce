@@ -3,10 +3,10 @@
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
-            <div class="navbar-brand-box">
-                <a href="<?=base_url("dashboard")?>" class="">
-                    <h1>Luxo Mall</h1>
-                    
+            <div class="navbar-brand-box d-flex align-items-center">
+                <a href="<?=base_url("dashboard")?>" class="d-flex align-items-center">
+                    <img src="<?=base_url()?>assets/images/cok/Frame 29.svg" width="50" height="50" alt="">
+                    <h2 class="ml-2 mb-0">Muhasabah Custom</h2>
                 </a>
             </div>
             <?php if ($_SESSION['role'] == 1) : ?>
@@ -29,11 +29,6 @@
                     <!-- Hasil pencarian akan ditampilkan di sini -->
                 </div>
             </div>
-
-            
-             
-            
-
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-cart-dropdown"

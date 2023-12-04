@@ -21,9 +21,7 @@
                                 <label for="harga_produk">Total Harga</label>
                                 <input id="harga_produk" name="harga_produk" type="text" class="form-control" placeholder="Harga Produk" autocomplete="off" value="<?=$result->total?>" disabled>
                             </div>
-                            <div class="card">
-                                <img class="card-img img-fluid  " src="<?= base_url('uploads/').$result->transfer ?>" alt="Card image">
-                            </div>
+                            
                         
                             <div class="mb-3">
                                 <label class="control-label" for="kondisi">Status Pembayaran</label>

@@ -12,10 +12,10 @@
                 <table id="categoryTable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Barang</th>
                             <th>Rating</th>
                             <th>Komentar</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>
@@ -38,6 +38,12 @@
     $(document).ready(function () {
 
         var columns = [
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    return meta.row + 1;
+                }
+            },
             {
                 data: 'nama_produk',
             },
@@ -64,14 +70,6 @@
             },
             {
                 data: 'komentar',
-            },
-            {
-                data: null,
-                render: function (data) {
-                    return '<a href="<?= base_url('review/')?>' + data.idPayment +
-                        '"><button class="btn btn-success btn-sm btn-bg-gradient-x-blue-green box-shadow-2" title="Lihat Resi"><i class="fas fa-eye"></i></button></a>';
-
-                }
             }
         ];
 

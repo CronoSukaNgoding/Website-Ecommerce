@@ -59,7 +59,7 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center"> 
                                         <a href="<?= base_url('/dashboard') ?>" class="d-block auth-logo">
-                                            <img src="/assets/images/cok/Frame 29.svg" alt="" class="mx-auto">
+                                            <img src="<?=base_url()?>assets/images/cok/Frame 29.svg" alt="" class="mx-auto">
                                         </a>
                                     </div>
                                     <div class="my-auto">
