@@ -98,7 +98,7 @@ $routes->post('checkout/del/(:any)', 'CartController::delcheckout/$1',['filter' 
 //payment
 $routes->get('payment/(:any)', 'PaymentController::Payment/$1',['filter' => 'role:admin,user']);
 $routes->post('payment/save', 'PaymentController::svpayment',['filter' => 'role:admin,user']);
-
+$routes->post('payment/del/(:any)', 'PaymentController::delPayment/$1',['filter' => 'role:admin,user']);
 //data pesanan
 $routes->get('/data-pesanan', 'DataPesananController::index',['filter' => 'role:admin']);
 $routes->get('/data-pembayaran', 'DataPembayaranController::index',['filter' => 'role:admin,user']);

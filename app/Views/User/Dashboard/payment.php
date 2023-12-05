@@ -7,52 +7,81 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Form Pembayaran</h4>
-                <p class="card-title-desc">Isi Form Sebagai Bukti Pembayaran</p>
+                
 
                 <form id="myForm" method="post">
                     <div class="row">
+                        
+                        <!-- Left Column -->
                         <div class="col-sm-6">
+                            <h4 class="card-title">Form Pembayaran</h4>
+                            <p class="card-title-desc">Isi Form Sebagai Bukti Pembayaran</p>
                             <input type="hidden" value="">
                             <div class="mb-3">
                                 <label for="nama">Rekening Tujuan</label>
-                                
                                 <input type="text" class="form-control" name="fullname" id="nama" placeholder="Nama" autocomplete="off"  value="QRIS A/N OYA STORE" disabled>
-                                <div class="card  mt-3">
-                                    <img class="card-img img-fluid  " style="width : 50%;" src="<?= base_url('admin/qris.png') ?>" alt="Card image">
-                                </div>
-                                <h4 class="mt-3 total">Harga yang harus dibayar : Rp. <?= number_format($result[0]->total, 0, ',', '.') ?></h4>
+                                
                                 <input type="hidden" value="<?=$result[0]->id_pre?>" class="idPrePay"name="id_prepayment">
                                 <input type="hidden" value="<?=$result[0]->id_cart?>" class="idCart"name="id_cart">
                                 <input type="hidden" value="<?=$result[0]->qty?>" class="qty"name="qty">
                                 <?php foreach($result as $listPay):?>
                                     <input type="hidden" value="<?=$listPay->id_produk?>" class="idProduk" name="id_produk[]">
-                                    <?php endforeach?>
+                                <?php endforeach?>
                             </div>
 
                             <div class="mb-3">
                                 <label for="transfer">Bukti Transfer</label>
-                                <input type="file" class="form-control" id="transfer" name="transfer" placeholder="Lengkapi Bukti Transfer"
-                                value="" autocomplete="off" required>
+                                <input type="file" class="form-control" id="transfer" name="transfer" placeholder="Lengkapi Bukti Transfer" value="" autocomplete="off" required>
                             </div>
                             <!-- ladda button -->
                             <div id="ladda-spinner" class="spinner-border text-primary m-1" role="status" style="display: none;">
                                 <span class="sr-only">Loading...</span>
                             </div>
+                        </div>
 
+                        <!-- Right Column -->
+                        <div class="col-sm-6 text-center">
+                            <div class="card  d-inline-block">
+                                    <img class="card-img img-fluid" style="width: 50%;" src="<?= base_url('admin/qris.png') ?>" alt="Card image">
+                                </div>
+                                <h4 class=" total">Harga yang harus dibayar : Rp. <?= number_format($result[0]->total, 0, ',', '.') ?></h4>
                         </div>
 
                     </div>
 
+
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light" >Simpan</button>
-                        <button type="button" class="btn btn-danger waves-effect waves-light">Batal</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#confirmationModal">Batal</button>
                     </div>
                 </form>
                 
             </div>
         </div>
+        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="<?= base_url('/payment/del/').$id?>" method="POST">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk tidak melanjutkan pembayaran?
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <!-- Make sure to prevent conflicts by changing the ID of the submit button -->
+                <button type="submit" class="btn btn-primary">Yakin</button>
+            </div>
+        </div>
     </div>
+    </form>
+</div>
+    </div>
+    
 </div>
 <!-- end row -->
 

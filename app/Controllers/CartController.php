@@ -16,6 +16,7 @@ class CartController extends BaseController
             ->select("*, cart.created_at as tglbuat, cart.uniksesi as id, cart.id as id_cart")
             ->join('users', 'users.user_id = cart.id_user')
             ->join('produk', 'produk.id = cart.id_produk')
+            ->join('groupphotoproduk','groupphotoproduk.id_produk = cart.id_produk')
             ->join('sub_kategori', 'produk.id_sub = sub_kategori.id')
             ->orderBy('cart.created_at', 'DESC')
             ->where('unikSesi', $this->sesi->get('unikSesi'))
@@ -26,6 +27,7 @@ class CartController extends BaseController
             $this->sesi->setFlashdata('error', 'Data keranjang kosong');
             return redirect()->to('/cart-null');
         }
+        
 
         // Use an associative array to store unique products based on their IDs
         $uniqueProducts = [];
@@ -44,6 +46,7 @@ class CartController extends BaseController
             'title' => 'Cart',
             'keranjang' => $uniqueProductList,
         ];
+        // dd($data);
 
         return view('User/Dashboard/cart', $data);
 

@@ -12,7 +12,9 @@ class CheckoutController extends BaseController
         $checkout = $this->checkout->select("*, checkout.created_at as tglbuat, checkout.id_checkout as idcekot")
         ->join('users', 'users.user_id = checkout.id_user')
         ->join('produk', 'produk.id = checkout.id_produk')
+        ->join('groupphotoproduk','groupphotoproduk.id_produk = checkout.id_produk')
         ->orderBy('checkout.created_at', 'DESC')
+        ->groupBy('checkout.id_produk')
         ->get()
         ->getResult();
 
@@ -22,6 +24,7 @@ class CheckoutController extends BaseController
             'result' => $checkout,
             'id'=>$id
         ];
+
         return view('User/Dashboard/checkout', $data);
     
     }

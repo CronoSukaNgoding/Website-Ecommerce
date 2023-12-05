@@ -21,7 +21,7 @@ class AdminProdukController extends BaseController
 
     public function viewtambah(){
         $cekkategori = $this->kategori->get()->getResult();
-        $ceksub = $this->kategori->join('sub_kategori', 'sub_kategori.id_kategori = kategori.id')->get()->getResult();
+        $ceksub = $this->sub_kategori->get()->getResult();
         $data =[
             'user' => $this->users->where('user_id', $this->sesi->get('user_id'))->first(),
             'result' => $this->produk->getProduk(),
@@ -66,9 +66,9 @@ class AdminProdukController extends BaseController
             $this->produk->insert($dataProduk);
             $cekData = $this->produk->where('nama_produk', $nama_produk)->first();
 
-            $uuid2 = Uuid::uuid4();
+        //    dd($cekData);
             $dataDetail = [
-                'id' => $uuid2->toString(),
+                'id' => $uuid->toString(),
                 'id_produk' => $cekData->id,
                 'keterangan' => $this->request->getVar('keterangan'),
                 'stok' => $this->request->getVar('stok'),

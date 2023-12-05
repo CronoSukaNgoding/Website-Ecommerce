@@ -39,15 +39,30 @@ class AuthController extends BaseController
                 return redirect()->to('/masuk');
             }else {
                 $uuid = Uuid::uuid4();
-                $ses_data = [
-                    'user_id' => $user->user_id,
-                    'unikSesi' => $uuid->toString(),
-                    'username' => $user->username,
-                    'email' => $user->email,
-                    'logged_in' => true,
-                    'role' => $user->role_id,
-                    'avatar' => $user->avatar,
-                ];
+                $cekUnikSesi = $this->cart->where('id_user', $user->user_id)->first();
+                $ses_data;
+                if($cekUnikSesi){
+                    $ses_data = [
+                        'user_id' => $user->user_id,
+                        'unikSesi' => $cekUnikSesi->uniksesi,
+                        'username' => $user->username,
+                        'email' => $user->email,
+                        'logged_in' => true,
+                        'role' => $user->role_id,
+                        'avatar' => $user->avatar,
+                    ];
+                }else{
+                    $ses_data = [
+                        'user_id' => $user->user_id,
+                        'unikSesi' => $uuid->toString(),
+                        'username' => $user->username,
+                        'email' => $user->email,
+                        'logged_in' => true,
+                        'role' => $user->role_id,
+                        'avatar' => $user->avatar,
+                    ];
+                }
+
                 $this->sesi->set($ses_data);
                 $id = $user->user_id;
                 $cekData = $this->usersprofil->where('userid', $id)->first();

@@ -20,6 +20,7 @@ class PaymentController extends BaseController
             'title' => 'Checkout',
             'profile' => $user,
             'result' => $prepayment,
+            'id'=> $id
         ];
         return view('User/Dashboard/payment', $data);
     
@@ -72,5 +73,31 @@ class PaymentController extends BaseController
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Field transfer tidak ditemukan dalam permintaan AJAX']);
             }
         }
+    }
+    public function delPayment($id){
+        $dataPre = $this->PrePayment->where('id_pre', $id)->get()->getResult();
+        foreach($dataPre as $hapus){
+            $datacheckout = $this->checkout->where('id_checkout', $hapus->id_checkout)->get()->getResult();
+            $produk = $this->produk->select('*, produk_detail.id as idprodukdetail, produk_detail.stok as stokproduk')
+                ->join('produk_detail', 'produk_detail.id_produk = produk.id')
+                ->where('produk.id', $hapus->id_produk)
+                ->first();
+            
+             $stok_asli = $produk->stokproduk + $hapus->qty; 
+            $datacek = [
+                'id' => $produk->idprodukdetail,
+                'stok' => $stok_asli
+            ];
+
+            $this->produk_detail->save($datacek);
+            
+            
+            $this->checkout->delete($hapus->id);
+            $this->PrePayment->delete($hapus->id);
+        }
+
+        // dd($dataPre);
+        return redirect()->to('/dashboard');
+        
     }
 }

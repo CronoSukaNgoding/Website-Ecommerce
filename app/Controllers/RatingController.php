@@ -9,7 +9,7 @@ class RatingController extends BaseController
         $data = [
             'title' => 'Data Rating Produk',
         ];
-            return view('admin/Rating',$data);
+            return view('admin/rating',$data);
     
     }
     public function getRating(){

@@ -89,6 +89,7 @@
                         <table class="table align-middle mb-0 table-nowrap">
                             <thead class="table-light">
                                 <tr>
+                                     <th scope="col">Product</th>
                                     <th scope="col">Product Desc</th>
                                     <th scope="col">Ongkir</th>
                                     <th scope="col">Price</th>
@@ -102,9 +103,11 @@
 						?>
                                 <tr class="cart-item">
 
-                                    <input type="hidden" value="<?=$value->id_produk?>" class="idProduk">
-                                    <input type="hidden" value="<?=$value->id_cart?>" class="idCart">
-                                    <input type="hidden" value="<?=$value->qty?>" class="qty">
+                                    <th scope="row"><img src="<?= base_url('admin/produk/'.$value->photo_produk) ?>"
+                                            alt="product-img" title="product-img" class="avatar-md"></th>
+                                            <input type="hidden" value="<?=$value->id_produk?>" class="idProduk">
+                                            <input type="hidden" value="<?=$value->id_cart?>" class="idCart">
+                                            <input type="hidden" value="<?=$value->qty?>" class="qty">
                                     <td>
                                         <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html"
                                                 class="text-dark"><?= $value->nama_produk?></a></h5>
@@ -128,7 +131,7 @@
 					endforeach
 						?>
                                 <tr>
-                                    <td colspan="2" class="text-end fw-bold ">Total:</td>
+                                    <td colspan="3" class="text-end fw-bold ">Total:</td>
                                     <td><?= 'Rp ' . number_format($total, 2, ',', '.'); ?></td>
                                     <input name="total" type="hidden" value="<?= $total?>" class="hargaTotal">
                                 </tr>
