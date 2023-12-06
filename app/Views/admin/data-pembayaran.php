@@ -45,20 +45,18 @@
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="" method="POST" id="deleteForm">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Data</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Apakah Anda yakin ingin menghapus data ini?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </div>
-                        </form>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus data ini?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger" id="konfirmasiHapus">Hapus</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,7 +130,7 @@
                     return '<a href="<?= base_url('data-pembayaran/')?>' + data.idPayment +
                         '"><button class="btn btn-success btn-sm btn-bg-gradient-x-blue-green box-shadow-2" title="Edit data"><i class="fas fa-pencil-alt"></i></button></a>' +
                         '<button class="btn btn-danger btn-sm btn-bg-gradient-x-blue-green box-shadow-2" type="button" value="" title="Hapus data?" data-bs-toggle="modal" onclick="tampilkanModalKonfirmasi(' +
-                        data.idPayment + ')""><i class="fas fa-trash-alt"></i></button>';
+                        data.idPayment + ')"><i class="fas fa-trash-alt"></i></button>';
 
                 }
             }
