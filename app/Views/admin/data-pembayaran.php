@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Transaksi</th>
                             <th>Nama</th>
                             <th>Barang</th>
                             <th>Jumlah</th>
@@ -80,6 +81,8 @@
                 render: function (data, type, row, meta) {
                     return meta.row + 1;
                 }
+            },{
+                data:'id_payment',
             },
             {
                 data: 'fullname',

@@ -67,6 +67,7 @@
 <script href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"></script>
 <script href="https://code.jquery.com/jquery-3.7.0.js"></script>
 
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="73b1adaf-77bc-43ce-a938-3d450b49eb6e";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
     
     <?php $this->renderSection('css');?>
     
@@ -122,7 +123,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         margin-right: 5px;
-        width: 150px; 
+        width: 130px; 
     }
 </style>
 <style>

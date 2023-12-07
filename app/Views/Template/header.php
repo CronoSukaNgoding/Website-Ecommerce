@@ -3,7 +3,7 @@
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
-            <div class="navbar-brand-box d-flex align-items-center">
+            <div class="navbar-brand-box d-flex d-none d-lg-inline-block align-items-center">
                 <a href="<?=base_url("dashboard")?>" class="d-flex align-items-center">
                     <img src="<?=base_url()?>assets/images/cok/Frame 29.svg" width="50" height="50" alt="">
                     <h2 class="ml-2 mb-0">Muhasabah Custom</h2>

@@ -13,68 +13,53 @@
                     <i class="fas fa-plus"></i> Tambah data Kategori
                 </button>
 
-                <!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" data-bs-toggle="tab" href="#kategori" role="tab">
-							<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-							<span class="d-none d-sm-block">Kategori</span>    
-						</a>
-					</li>
-					
-				</ul>
+                
 
-				<!-- Tab panes -->
-				<div class="tab-content p-3 text-muted">
-					<div class="tab-pane active" id="kategori" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
+				<div class="table-responsive">
+                    <table class="table table-bordered ">
 
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Kategori</th>
-                                        <th>Icon</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kategori</th>
+                                <th>Icon</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($kategori as $value):
+                            ?>
+                            <tr>
+                                <th scope="row"><?= $no++?></th>
+                                <td><?= $value->kategori?></td>
+                                <td>
+                                    <div class="col-lg-4">
+                                        <div>
+                                            <img src="<?= base_url('admin/kategori/'.$value->icon) ?>" alt="" class="rounded avatar-md">
+                                            <p class="mt-2  mb-lg-0"></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-bg-gradient-x-purple-blue box-shadow-2" style="Margin-bottom: 10px;"
+                                        data-bs-toggle="modal" data-bs-target="#editkategori<?= $value->id;?>">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger btn-bg-gradient-x-purple-blue box-shadow-2" style="Margin-bottom: 10px;"
+                                        data-bs-toggle="modal" data-bs-target="#hapuskategori<?= $value->id;?>">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                                 <?php
-                                $no = 1;
-                                foreach ($kategori as $value):
-                                    ?>
-                                    <tr>
-                                        <th scope="row"><?= $no++?></th>
-                                        <td><?= $value->kategori?></td>
-                                        <td>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <img src="<?= base_url('admin/kategori/'.$value->icon) ?>" alt="" class="rounded avatar-md">
-                                                    <p class="mt-2  mb-lg-0"></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-success btn-bg-gradient-x-purple-blue box-shadow-2" style="Margin-bottom: 10px;"
-                                                data-bs-toggle="modal" data-bs-target="#editkategori<?= $value->id;?>">
-                                                <i class="fas fa-pen"></i>
-                                            </button>
-
-                                            <button type="button" class="btn btn-danger btn-bg-gradient-x-purple-blue box-shadow-2" style="Margin-bottom: 10px;"
-                                                data-bs-toggle="modal" data-bs-target="#hapuskategori<?= $value->id;?>">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                        <?php
-                                        endforeach;
-                                        ?>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-					</div>
-					
-				</div>
+                                endforeach;
+                                ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
