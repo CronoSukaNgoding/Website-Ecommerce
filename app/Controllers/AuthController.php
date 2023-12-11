@@ -71,6 +71,7 @@ class AuthController extends BaseController
                     $dataKota = $this->kota->get()->getResult();
                     $data=[
                         'menu' => 'editprofile',
+                        'title'=> 'Edit Profile',
                         'isUri' => $this->request->uri,
                         'result' => $this->users->where('user_id',$this->sesi->get('user_id'))->first(),
                         'user' => $this->users->where('user_id',$this->sesi->get('user_id'))->first(),

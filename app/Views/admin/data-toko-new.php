@@ -72,17 +72,13 @@
                 console.log(selectedProvinceId);
                 var kotaDropdown = $("#kota");
 
-                // Mengirim permintaan AJAX untuk mendapatkan data kota berdasarkan province_id
                 $.ajax({
-                    url: "/get-kota-by-provinsi", // Ganti dengan URL endpoint yang sesuai di server
+                    url: "/get-kota-by-provinsi",
                     method: "GET",
                     data: { provinsi_id: selectedProvinceId },
                     dataType: "json",
                     success: function(data) {
-                        // Menghapus semua opsi kota yang ada
                         kotaDropdown.find('option').not(':first').remove();
-
-                        // Mengisi dropdown kota dengan opsi-opsi baru
                         $.each(data, function(index, city) {
                             kotaDropdown.append($('<option>', {
                                 value: city.city_id,
