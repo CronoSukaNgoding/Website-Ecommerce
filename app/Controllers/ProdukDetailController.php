@@ -66,7 +66,7 @@ class ProdukDetailController extends BaseController
 
 
         try {
-            $cekCart = $this->cart->where('id_produk', $productId)->first();
+            $cekCart = $this->cart->where('id_produk', $productId)->where('id_user', $this->sesi->get('user_id'))->first();
             if($cekCart){
                 $response = [
                     'message' => "Produk ini sudah ada di cart. Jika ingin menambah quantity, silahkan menambah di keranjang!!!"

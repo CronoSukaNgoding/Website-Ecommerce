@@ -142,5 +142,5 @@
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/auth-recoverpw-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Oct 2022 04:11:04 GMT -->
+
 </html>

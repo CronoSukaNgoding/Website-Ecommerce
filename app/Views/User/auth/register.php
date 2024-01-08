@@ -62,6 +62,30 @@
                                         <div>
                                             <h5 class="text-warning">Register account</h5>
                                             <p class="text-muted">Registrasi dan mulai berbelanja di Luxo Mall</p>
+                                            <?php if(session()->getFlashData("sukses")): ?>
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    <?=session()->getFlashData("sukses")?>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                                <?php elseif(session()->getFlashData("hapus")): ?>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    <?=session()->getFlashData("hapus")?>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                                <?php elseif(session()->getFlashData("error")): ?>
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <?php
+                                                        $errors = session()->getFlashData("error");
+
+                                                        // Iterate over the errors and display them
+                                                        foreach ($errors as $field => $error) {
+                                                            echo esc($error) . '<br>';
+                                                        }
+                                                        ?>
+
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                            <?php endif; ?>
                                         </div>
             
                                         <div class="mt-4">

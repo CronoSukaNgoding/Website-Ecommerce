@@ -21,6 +21,7 @@ class AuthController extends BaseController
             'password' => 'required|min_length[6]',
         ];
         if (!$this->validate($isValid)) {
+            $this->sesi->setFlashdata('error', $this->validator->getErrors());
             return redirect()->to('/masuk')->withInput()->with('validation', '');
         }
        
@@ -28,14 +29,14 @@ class AuthController extends BaseController
         
         
         if (!$user) {
-            $this->sesi->setFlashdata('error', 'Username tidak ditemukan');
+            $this->sesi->setFlashdata('error', ['errors'=> 'Username tidak ditemukan3']);
             return redirect()->to('/masuk');
         }else{
             $password = $this->request->getVar("password");
             $hash = $user->password;
             $cekPw = password_verify($password, $hash);
             if(!$cekPw){
-                $this->sesi->setFlashdata('error', 'Password salah');
+                $this->sesi->setFlashdata('error', ['errors'=> 'Password salah']);
                 return redirect()->to('/masuk');
             }else {
                 $uuid = Uuid::uuid4();

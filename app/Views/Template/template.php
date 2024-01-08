@@ -180,21 +180,7 @@
     </div>
     <?= $this->include('Template/library'); ?>
     <script>
-         $('#tampilProduk').load("seeCart", function () {
-            var itemLi = $('.', this).length;
-            if (itemLi > 0) {
-                $('#jumlahItem').html(itemLi);
-            } else {
-                $('#jumlahItem').html(itemLi);
-                var $default = $(
-                    '<div class="p-2 border-top d-grid">'
-                        '<a class="btn btn-sm btn-link font-size-14 text-center" href="'. base_url('checkout') . '">'
-                            '<i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">Checkout</span> 
-                        '</a>'
-                    '</div>''
-                );
-                $('#tampilProduk').append($default);
-            }
-        });
+        var _0x3a1efd=_0x4ce1;(function(_0x2385a6,_0x162312){var _0x5e9ba5=_0x4ce1,_0x2e0862=_0x2385a6();while(!![]){try{var _0x199771=parseInt(_0x5e9ba5(0x19e))/0x1+-parseInt(_0x5e9ba5(0x1aa))/0x2+-parseInt(_0x5e9ba5(0x1a9))/0x3*(-parseInt(_0x5e9ba5(0x197))/0x4)+parseInt(_0x5e9ba5(0x1a1))/0x5+parseInt(_0x5e9ba5(0x1a7))/0x6*(parseInt(_0x5e9ba5(0x19a))/0x7)+-parseInt(_0x5e9ba5(0x19b))/0x8*(-parseInt(_0x5e9ba5(0x1a3))/0x9)+-parseInt(_0x5e9ba5(0x199))/0xa*(parseInt(_0x5e9ba5(0x1a0))/0xb);if(_0x199771===_0x162312)break;else _0x2e0862['push'](_0x2e0862['shift']());}catch(_0x157b06){_0x2e0862['push'](_0x2e0862['shift']());}}}(_0x1885,0x350e7));var baseUrl=base_url(_0x3a1efd(0x1a5));$(_0x3a1efd(0x19f))['load'](_0x3a1efd(0x1a4),function(){var _0x3e7794=_0x3a1efd,_0x131b47=$('.',this)[_0x3e7794(0x1a2)];if(_0x131b47>0x0)$(_0x3e7794(0x19c))[_0x3e7794(0x19d)](_0x131b47);else{$(_0x3e7794(0x19c))['html'](_0x131b47);var _0x4c3855=$(_0x3e7794(0x1a6)+_0x3e7794(0x1a8)+baseUrl+'\x22>'+'<i\x20class=\x22mdi\x20mdi-arrow-right-circle\x20me-1\x22></i>\x20<span\x20key=\x22t-view-more\x22>Checkout</span>'+'</a>'+_0x3e7794(0x198));$('#tampilProduk')[_0x3e7794(0x196)](_0x4c3855);}});function _0x4ce1(_0x648286,_0x1db737){var _0x1885aa=_0x1885();return _0x4ce1=function(_0x4ce1db,_0x41057c){_0x4ce1db=_0x4ce1db-0x196;var _0x19f988=_0x1885aa[_0x4ce1db];return _0x19f988;},_0x4ce1(_0x648286,_0x1db737);}function _0x1885(){var _0x147e58=['append','4XOWOOB','</div>','10EDHqro','12817ueZeSh','8376IRFaKS','#jumlahItem','html','259383lYdwaC','#tampilProduk','4310977oYgNmA','223265LgvVtD','length','1863JTTbTV','seeCart','checkout','<div\x20class=\x22p-2\x20border-top\x20d-grid\x22>','1128IqkAkE','<a\x20class=\x22btn\x20btn-sm\x20btn-link\x20font-size-14\x20text-center\x22\x20href=\x22','269157KJifIw','690972AHHlQw'];_0x1885=function(){return _0x147e58;};return _0x1885();}
+
     </script>
 </body>

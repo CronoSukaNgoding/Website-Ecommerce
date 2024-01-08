@@ -106,34 +106,7 @@
 <script src="/assets/js/pages/form-advanced.init.js"></script>
 <script src="/assets/libs/select2/js/select2.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#provinsi").change(function () {
-            var selectedProvinceId = $(this).val();
-            console.log(selectedProvinceId);
-            var kotaDropdown = $("#kota");
-            $.ajax({
-                url: "/get-kota-by-provinsi",
-                method: "GET",
-                data: {
-                    provinsi_id: selectedProvinceId
-                },
-                dataType: "json",
-                success: function (data) {
-                    kotaDropdown.find('option').not(':first').remove();
-                    $.each(data, function (index, city) {
-                        kotaDropdown.append($('<option>', {
-                            value: city.city_id,
-                            text: city.city_name,
-                            'data-province': city.province_id
-                        }));
-                    });
-                },
-                error: function () {
-                    console.error('Terjadi kesalahan saat mengambil data kota.');
-                }
-            });
-        });
-    });
+    var _0x278d9b=_0x5e12;function _0x5e12(_0x3f89fe,_0x7e1cef){var _0x4fffa9=_0x4fff();return _0x5e12=function(_0x5e1289,_0x2cf4dd){_0x5e1289=_0x5e1289-0x79;var _0x56844c=_0x4fffa9[_0x5e1289];return _0x56844c;},_0x5e12(_0x3f89fe,_0x7e1cef);}function _0x4fff(){var _0xa7b265=['7629462dAdQPK','961530xAvGJt','each','<option>','17mFFMCP','12649007jMhXCH','remove','ajax','#provinsi','find','option','append','7598NRKVZR','#kota','2264375NaCKoj','change','not','error','12958216qzFcpk','val','76DYLoSG','ready','166131tIxnKx','20NwuySe','GET'];_0x4fff=function(){return _0xa7b265;};return _0x4fff();}(function(_0x55724d,_0x2e5cbc){var _0x3a8541=_0x5e12,_0x474454=_0x55724d();while(!![]){try{var _0x378f7c=-parseInt(_0x3a8541(0x81))/0x1*(parseInt(_0x3a8541(0x89))/0x2)+parseInt(_0x3a8541(0x7a))/0x3*(-parseInt(_0x3a8541(0x91))/0x4)+parseInt(_0x3a8541(0x8b))/0x5+-parseInt(_0x3a8541(0x7e))/0x6+parseInt(_0x3a8541(0x82))/0x7+parseInt(_0x3a8541(0x8f))/0x8+parseInt(_0x3a8541(0x7d))/0x9*(-parseInt(_0x3a8541(0x7b))/0xa);if(_0x378f7c===_0x2e5cbc)break;else _0x474454['push'](_0x474454['shift']());}catch(_0x1b0b88){_0x474454['push'](_0x474454['shift']());}}}(_0x4fff,0xdd7d0),$(document)[_0x278d9b(0x79)](function(){var _0x470a54=_0x278d9b;$(_0x470a54(0x85))[_0x470a54(0x8c)](function(){var _0x1e0fb3=_0x470a54,_0x4f417b=$(this)[_0x1e0fb3(0x90)]();console['log'](_0x4f417b);var _0x444e1c=$(_0x1e0fb3(0x8a));$[_0x1e0fb3(0x84)]({'url':'/get-kota-by-provinsi','method':_0x1e0fb3(0x7c),'data':{'provinsi_id':_0x4f417b},'dataType':'json','success':function(_0x40a1f0){var _0x380726=_0x1e0fb3;_0x444e1c[_0x380726(0x86)](_0x380726(0x87))[_0x380726(0x8d)](':first')[_0x380726(0x83)](),$[_0x380726(0x7f)](_0x40a1f0,function(_0x20e434,_0x52cd96){var _0x40f2e6=_0x380726;_0x444e1c[_0x40f2e6(0x88)]($(_0x40f2e6(0x80),{'value':_0x52cd96['city_id'],'text':_0x52cd96['city_name'],'data-province':_0x52cd96['province_id']}));});},'error':function(){var _0x4b52a0=_0x1e0fb3;console[_0x4b52a0(0x8e)]('Terjadi\x20kesalahan\x20saat\x20mengambil\x20data\x20kota.');}});});}));
 </script>
 
 <?=$this->endSection()?>

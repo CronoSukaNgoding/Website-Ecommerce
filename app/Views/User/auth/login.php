@@ -3,7 +3,7 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Oct 2022 04:11:03 GMT -->
+
 <head>
         
         <meta charset="utf-8" />
@@ -67,6 +67,29 @@
                                         <div>
                                             <h5 class="text-warning">Selamat Datang</h5>
                                             <p class="text-muted">Masuk Sekarang!</p>
+                                            <?php if(session()->getFlashData("sukses")): ?>
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    <?=session()->getFlashData("sukses")?>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                                <?php elseif(session()->getFlashData("hapus")): ?>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    <?=session()->getFlashData("hapus")?>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                                <?php elseif(session()->getFlashData("error")): ?>
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <?php
+                                                        $errors = session()->getFlashData("error");
+                                                        // d($errors);
+                                                        foreach ($errors as $field => $error) {
+                                                            echo esc($error) . '<br>';
+                                                        }
+                                                        ?>
+
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                            <?php endif; ?>
                                         </div>
                                        
                                         <div class="mt-4">

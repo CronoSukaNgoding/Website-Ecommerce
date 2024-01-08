@@ -23,15 +23,15 @@ class DaftarController extends BaseController
 
     public function Register(){
          $isValid = [
-            'fullname' => 'required',
-            'username' => 'required|min_length[4]|is_unique[users.username]',
+            'fullname' => 'required|alpha',
+            'username' => 'required|alpha|is_unique[users.username]',
             'email' => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[6]',
-       ];
-       
-       if (!$this->validate($isValid)) {
-           return redirect()->to('/register')->withInput()->with('validation', '');
-       }
+        ];
+        if (!$this->validate($isValid)) {
+            $this->sesi->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->to('/register')->withInput()->with('validation', '');
+        }
         
        $data = [
            'fullname' => $this->request->getVar('fullname'),
