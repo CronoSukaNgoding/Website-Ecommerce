@@ -109,7 +109,7 @@ class AdminProdukController extends BaseController
             return redirect()->to('/list-produk'); 
         }
         catch (\Exception $e) {
-            dd($e->getMessage());
+            $e->getMessage();
         }
     }
 
@@ -166,9 +166,6 @@ class AdminProdukController extends BaseController
     }
     public function updateProduk($id)
     {   
-        // $photoproduk = $this->request->getFile('photo_produk');
-        // $cekphotolama = $this->produk->select('photo_produk')->where('id', $id)->get()->getRow();
-
         $dataProduk = [
             'id' => $id,
             'nama_produk' => $this->request->getVar('nama_produk'),
