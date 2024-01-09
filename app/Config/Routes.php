@@ -139,7 +139,7 @@ $routes->get('/get-product', 'getKategori::getProduct');
 
 //laporan
 $routes->get('/laporan', 'Laporan::index');
-$routes->get('/ajax-laporan', 'Laporan::getLaporan');
+$routes->post('/ajax-laporan', 'Laporan::getLaporan');
 
 //AJAX Generate Table
 
