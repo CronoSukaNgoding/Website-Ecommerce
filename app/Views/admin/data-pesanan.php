@@ -17,6 +17,7 @@
                             <th>Jumlah</th>
                             <th>Total Harga</th>
                             <th>Notes</th>
+                            <th>Order Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -60,7 +61,14 @@
                 render: function (data) {
                     return data ? data : 'Tidak ada catatan';
                 }
+            },
+            {
+                data: 'tglbuat',
+                render: function (data) {
+                    return data ;
+                }
             }
+            
         ];
 
         var order = [
