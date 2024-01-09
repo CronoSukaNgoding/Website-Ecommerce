@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Tanggal Order</th>
                             <th>Nama</th>
                             <th>Barang</th>
                             <th>Jumlah</th>
@@ -97,7 +98,10 @@
                         '"><button class="btn btn-success btn-sm btn-bg-gradient-x-blue-green box-shadow-2" title="Lihat Resi"><i class="fas fa-eye"></i></button></a>';
 
                 }
-            }
+            },
+            {
+                data: 'tglbuat',
+            },
         ];
 
         var order = [
