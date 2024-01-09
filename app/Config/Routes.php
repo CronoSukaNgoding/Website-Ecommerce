@@ -138,8 +138,8 @@ $routes->get('/search', 'getKategori::search');
 $routes->get('/get-product', 'getKategori::getProduct');
 
 //laporan
-$routes->get('/laporan', 'Laporan::index');
-$routes->post('/ajax-laporan', 'Laporan::getLaporan');
+$routes->get('/laporan', 'Laporan::index',['filter' => 'role:admin']);
+$routes->post('/ajax-laporan', 'Laporan::getLaporan',['filter' => 'role:admin']);
 
 //AJAX Generate Table
 
@@ -147,10 +147,10 @@ $routes->post('/ajax-laporan', 'Laporan::getLaporan');
 $routes->get('/ajax-pesanan', 'DataPesananController::getPesanan');
 
 //pembayaran
-$routes->get('/ajax-pembayaran-admin', 'DataPembayaranController::getPayAdmin');
+$routes->get('/ajax-pembayaran-admin', 'DataPembayaranController::getPayAdmin',['filter' => 'role:admin']);
 $routes->get('/ajax-pembayaran-user', 'DataPembayaranController::getPayUser');
 
-$routes->get('/ajax-pengiriman-admin', 'DataPengirimanController::getSendAdmin');
+$routes->get('/ajax-pengiriman-admin', 'DataPengirimanController::getSendAdmin',['filter' => 'role:admin']);
 $routes->get('/ajax-pengiriman-user', 'DataPengirimanController::getSendUser');
 
 $routes->get('/ajax-review', 'RatingController::ajaxReviewUser');
