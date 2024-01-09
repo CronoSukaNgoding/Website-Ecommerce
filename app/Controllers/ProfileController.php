@@ -38,6 +38,19 @@ class ProfileController extends BaseController
 
     public function settingProfil($id)
     {
+        $isValid = [
+            'alamat' => 'required',
+            'kodepos' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
+            'nohp' => 'required',
+            // 'avatar' => 'required',
+            
+        ];
+        if (!$this->validate($isValid)) {
+            $this->sesi->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->to('/profile/'.$id)->withInput()->with('validation', '');
+        }
         $cekUser = $this->users->where('user_id', $id)->first();
         $avataruser = $this->request->getFile('avatar');
         $fullname = $this->request->getVar('fullname');

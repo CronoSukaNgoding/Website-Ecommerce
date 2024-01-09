@@ -56,24 +56,24 @@
                             </div>
                             <div class="mb-3">
                                 <label for="rt">RT</label>
-                                <input type="number" class="form-control" id="rt" name="rt" placeholder="Nomor HP"
+                                <input type="number" class="form-control" id="rt" name="rt" placeholder="RT"
                                     value="<?= $result->rt;?>" autocomplete="off" required>
                             </div>
                             <div class="mb-3">
                                 <label for="rw">RW</label>
-                                <input type="number" class="form-control" id="rw" name="rw" placeholder="Nomor HP"
+                                <input type="number" class="form-control" id="rw" name="rw" placeholder="RW"
                                     value="<?= $result->rw;?>" autocomplete="off" required>
                             </div>
     
                             <div class="mb-3">
                                 <label for="Kode_POS">Kode POS</label>
-                                <input type="number" class="form-control" id="kodepos" name="kodepos" placeholder="Nomor HP"
+                                <input type="number" class="form-control" id="kodepos" name="kodepos" placeholder="Kode POS"
                                     value="<?= $result->Kode_POS;?>" autocomplete="off" required>
                             </div>
                             <div class="mb-3">
     
     
-                                <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Pas Foto"
+                                <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Foto Profil"
                                     value="" autocomplete="off">
                             </div>
 

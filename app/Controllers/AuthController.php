@@ -29,7 +29,7 @@ class AuthController extends BaseController
         
         
         if (!$user) {
-            $this->sesi->setFlashdata('error', ['errors'=> 'Username tidak ditemukan3']);
+            $this->sesi->setFlashdata('error', ['errors'=> 'Username tidak ditemukan']);
             return redirect()->to('/masuk');
         }else{
             $password = $this->request->getVar("password");

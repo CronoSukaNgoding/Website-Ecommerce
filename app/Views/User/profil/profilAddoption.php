@@ -9,25 +9,48 @@
 
                 <h4 class="card-title">Data Diri</h4>
                 <p class="card-title-desc">Isi Form Berikut</p>
+                <?php if(session()->getFlashData("sukses")): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?=session()->getFlashData("sukses")?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php elseif(session()->getFlashData("hapus")): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?=session()->getFlashData("hapus")?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php elseif(session()->getFlashData("error")): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php
+                            $errors = session()->getFlashData("error");
+                            // d($errors);
+                            foreach ($errors as $field => $error) {
+                                echo esc($error) . '<br>';
+                            }
+                            ?>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php endif; ?>
 
                 <form action="<?=base_url("profile/updateprofil/". $user->user_id)?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="mb-3">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" name="fullname" id="nama" placeholder="Nama"
-                                value="<?= $result->fullname;?>" autocomplete="off" required>
+                                value="<?= $result->fullname;?>" autocomplete="off" >
                             </div>
 
                             <div class="mb-3">
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control" name="email" id="email" placeholder="email"
-                                value="<?= $result->email;?>" autocomplete="off" required>
+                                value="<?= $result->email;?>" autocomplete="off" >
                             </div>
 
                             <div class="mb-3">
                                 <label for="nohp">Nomor HP</label>
                                 <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Nomor HP"
-                                value="" autocomplete="off" required>
+                                value="" autocomplete="off" >
                             </div>
                             
                             <div class="mb-3">
@@ -52,29 +75,29 @@
                             <div class="mb-3">
                                 <label for="alamat">Alamat</label>
                                 <textarea class="form-control" id="alamat" rows="3" name="alamat" placeholder="Alamat"
-                                autocomplete="off" required></textarea>
+                                autocomplete="off" ></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="rt">RT</label>
-                                <input type="number" class="form-control" id="rt" name="rt" placeholder="Nomor HP"
-                                value="" autocomplete="off" required>
+                                <input type="number" class="form-control" id="rt" name="rt" placeholder="contoh : 001"
+                                value="" autocomplete="off" >
                             </div>
                             <div class="mb-3">
                                 <label for="rw">RW</label>
-                                <input type="number" class="form-control" id="rw" name="rw" placeholder="Nomor HP"
-                                value="" autocomplete="off" required>
+                                <input type="number" class="form-control" id="rw" name="rw" placeholder="contoh : 002"
+                                value="" autocomplete="off" >
                             </div>
 
                             <div class="mb-3">
                                 <label for="Kode_POS">Kode POS</label>
-                                <input type="number" class="form-control" id="kodepos" name="kodepos" placeholder="Nomor HP"
-                                value="" autocomplete="off" required>
+                                <input type="number" class="form-control" id="kodepos" name="kodepos" placeholder="contoh : 12345"
+                                value="" autocomplete="off" >
                             </div>
 
                             <div class="mb-3">
-                                <label for="avatar">Pas Foto</label>
-                                <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Pas Foto"
-                                value="" autocomplete="off" required>
+                                <label for="avatar">Foto Profil</label>
+                                <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Foto Profil"
+                                value="" autocomplete="off" >
                             </div>
 
                     </div>

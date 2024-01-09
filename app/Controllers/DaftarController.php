@@ -22,9 +22,9 @@ class DaftarController extends BaseController
     }
 
     public function Register(){
-         $isValid = [
+        $isValid = [
             'fullname' => 'required|alpha',
-            'username' => 'required|alpha|is_unique[users.username]',
+            'username' => 'required|is_unique[users.username]',
             'email' => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[6]',
         ];

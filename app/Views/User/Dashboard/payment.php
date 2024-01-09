@@ -73,7 +73,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                <!-- Make sure to prevent conflicts by changing the ID of the submit button -->
                 <button type="submit" class="btn btn-primary">Yakin</button>
             </div>
         </div>
