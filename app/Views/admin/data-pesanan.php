@@ -16,7 +16,7 @@
                             <th>Barang</th>
                             <th>Jumlah</th>
                             <th>Total Harga</th>
-                            <th>Notes</th>
+                            <th>Catatan</th>
                             <th>Order Date</th>
                         </tr>
                     </thead>

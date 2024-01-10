@@ -16,7 +16,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="nama_produk">Nama Produk</label>
-                                <input id="nama_produk" name="nama_produk" type="text" class="form-control" placeholder="Product Name" autocomplete="off" required>
+                                <input id="nama_produk" name="nama_produk" type="text" class="form-control" placeholder="Nama Produk" autocomplete="off" required>
                             </div>
 
                             <div class="mb-3">
@@ -27,7 +27,7 @@
                             <div class="mb-3">
                                 <label class="control-label" for="kategori">Kategori</label>
                                 <select name="kategori" class="form-control select2">
-                                    <option>-- Pilih --</option>
+                                    <option>-- Pilih Kategori --</option>
                                     <?php foreach($kategori as $listkategori) : ?>
                                     <option value="<?= $listkategori->id?>"><?= $listkategori->kategori?></option>
                                     <?php endforeach;?>
@@ -37,7 +37,7 @@
                             <div class="mb-3">
                                 <label class="control-label" for="sub_kategori">Sub Kategori</label>
                                 <select name="sub_kategori" class="form-control select2">
-                                    <option>-- Pilih --</option>
+                                    <option>-- Pilih Sub Kategori --</option>
                                     <option value="1">Normal</option>
                                     <option value="2">Custom</option>
                                 </select>

@@ -97,13 +97,13 @@
                                                 <?= csrf_field(); ?>
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username">
                                                 </div>
                         
                                                 <div class="mb-3">
                                                     <label class="form-label">Password</label>
                                                     <div class="input-group auth-pass-inputgroup">
-                                                        <input type="password" name="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                                        <input type="password" name="password" class="form-control" placeholder="Masukkan password" aria-label="Password" aria-describedby="password-addon">
                                                         <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                     </div>
                                                      

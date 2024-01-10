@@ -19,7 +19,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="nama_produk">Nama Produk</label>
-                                <input id="nama_produk" name="nama_produk" type="text" class="form-control" placeholder="Product Name" value="<?= $result->nama_produk?>" autocomplete="off" required>
+                                <input id="nama_produk" name="nama_produk" type="text" class="form-control" placeholder="Nama Produk" value="<?= $result->nama_produk?>" autocomplete="off" required>
                             </div>
 
                             <div class="mb-3">
