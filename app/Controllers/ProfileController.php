@@ -74,13 +74,24 @@ class ProfileController extends BaseController
             $namaavatar = $cekUser->avatar;
         }
 
-        $dataUser = [
-            'user_id' => $id,
-            'fullname' => $fullname,
-            'email' => $this->request->getVar('email'),
-            'avatar' => $namaavatar,
-            'role_id' => 2,
-        ];
+        if($this->sesi->get('role')== 1){
+            $dataUser = [
+                'user_id' => $id,
+                'fullname' => $fullname,
+                'email' => $this->request->getVar('email'),
+                'avatar' => $namaavatar,
+                'role_id' => 1,
+            ];
+        }else{
+            $dataUser = [
+                'user_id' => $id,
+                'fullname' => $fullname,
+                'email' => $this->request->getVar('email'),
+                'avatar' => $namaavatar,
+                'role_id' => 2,
+            ];
+        }
+        
 
         try {
             $this->users->save($dataUser); 
